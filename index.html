@@ -1103,9 +1103,8 @@
 
   <!-- ─── HERO ─── -->
   <section id="hero" aria-label="Hero">
-    <!-- Replace src with your video file: ./assets/hero.mp4 -->
-    <video class="hero-video" autoplay muted loop playsinline aria-hidden="true">
-      <!-- <source src="./assets/hero.mp4" type="video/mp4"> -->
+    <video id="heroVideo" class="hero-video" autoplay muted playsinline aria-hidden="true">
+      <source src="Final.mp4" type="video/mp4">
     </video>
 
     <div class="hero-bg" aria-hidden="true"></div>
@@ -1529,6 +1528,34 @@
   </footer>
 
   <script>
+    // ─── HERO VIDEO: scroll on first end, loop on return ───
+    const heroVideo = document.getElementById('heroVideo');
+    const heroSection = document.getElementById('hero');
+    const marquee = document.querySelector('.marquee-band');
+    let hasEnded = false;
+
+    heroVideo.addEventListener('ended', () => {
+      if (!hasEnded) {
+        hasEnded = true;
+        // Smooth scroll to the section just below the hero
+        const target = marquee || document.getElementById('shop');
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+      // After first end, always loop
+      heroVideo.loop = true;
+      heroVideo.play();
+    });
+
+    // When user scrolls back to hero after leaving, ensure video is playing
+    const heroObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && heroVideo.paused) {
+          heroVideo.play();
+        }
+      });
+    }, { threshold: 0.5 });
+    heroObserver.observe(heroSection);
+
     // ─── MOBILE NAV ───
     const menuBtn = document.getElementById('menuBtn');
     const navLinks = document.getElementById('navLinks');
