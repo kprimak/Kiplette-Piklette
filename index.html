@@ -189,7 +189,7 @@
       object-position: center center;
       z-index: 1;
       display: block;
-      filter: url(#sharpen) contrast(1.12) saturate(1.08) brightness(1.03);
+      filter: contrast(1.08) saturate(1.06);
     }
 
     /* Elegant navy + ivory gradient fallback (behind video) */
@@ -1126,22 +1126,6 @@
 
   <!-- ─── HERO ─── -->
   <section id="hero" aria-label="Hero" data-views="home">
-    <!-- SVG sharpening kernel applied to video via filter -->
-    <svg style="display:none" aria-hidden="true">
-      <defs>
-        <filter id="sharpen" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
-          <!-- Unsharp mask: high-pass edge detection then blend back -->
-          <feConvolveMatrix
-            order="3"
-            kernelMatrix=" 0 -1  0
-                          -1  5 -1
-                           0 -1  0"
-            preserveAlpha="true"
-            result="sharpened"/>
-        </filter>
-      </defs>
-    </svg>
-
     <video id="heroVideo" class="hero-video" autoplay muted playsinline aria-hidden="true">
       <source src="Final.mp4" type="video/mp4">
     </video>
