@@ -125,6 +125,8 @@
 
     .nav-links a:hover { color: var(--navy); }
     .nav-links a:hover::after { width: 100%; }
+    .nav-links a.nav-active { color: var(--navy); }
+    .nav-links a.nav-active::after { width: 100%; }
 
     .nav-links a:focus-visible {
       outline: 1px solid var(--gold);
@@ -430,6 +432,28 @@
 
     /* ─── SECTIONS ─── */
     section { padding: 112px 56px; }
+
+    /* ─── VIEW TRANSITIONS ─── */
+    [data-views] {
+      transition: opacity 280ms ease;
+    }
+    [data-views].view-hidden {
+      display: none !important;
+    }
+    [data-views].view-fade-in {
+      animation: viewFadeIn 320ms ease forwards;
+    }
+    @keyframes viewFadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0);    }
+    }
+
+    /* Extra top clearance when section is the first element (no hero above) */
+    body[data-view="shop"] #shop,
+    body[data-view="about"] #about,
+    body[data-view="pickleball"] #pickleball {
+      padding-top: 152px;
+    }
 
     /* ─── SHOP ─── */
     #shop { background: var(--ivory); }
@@ -1083,15 +1107,15 @@
 
   <!-- ─── NAVIGATION ─── -->
   <nav id="nav" role="navigation" aria-label="Main navigation">
-    <a href="#hero" class="nav-logo" aria-label="Kiplette Piklette — Home">
+    <a href="#view-home" data-nav-view="home" class="nav-logo" aria-label="Kiplette Piklette — Home">
       Kiplette <em>Piklette</em>
     </a>
 
     <ul class="nav-links" id="navLinks" role="list">
-      <li><a href="#about">About Us</a></li>
-      <li><a href="#pickleball">About Pickleball</a></li>
-      <li><a href="#shop">Shop All</a></li>
-      <li><a href="#shop" class="nav-cta">Shop Now</a></li>
+      <li><a href="#view-about" data-nav-view="about">About Us</a></li>
+      <li><a href="#view-pickleball" data-nav-view="pickleball">About Pickleball</a></li>
+      <li><a href="#view-shop" data-nav-view="shop">Shop All</a></li>
+      <li><a href="#view-shop" data-nav-view="shop" class="nav-cta">Shop Now</a></li>
     </ul>
 
     <button class="nav-hamburger" id="menuBtn"
@@ -1101,7 +1125,7 @@
   </nav>
 
   <!-- ─── HERO ─── -->
-  <section id="hero" aria-label="Hero">
+  <section id="hero" aria-label="Hero" data-views="home">
     <!-- SVG sharpening kernel applied to video via filter -->
     <svg style="display:none" aria-hidden="true">
       <defs>
@@ -1140,13 +1164,13 @@
       </p>
 
       <div class="hero-actions">
-        <a href="#shop" class="btn-ivory">
+        <a href="#view-shop" data-nav-view="shop" class="btn-ivory">
           Explore Collection
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
             <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
-        <a href="#about" class="btn-ghost-light">Our Story</a>
+        <a href="#view-about" data-nav-view="about" class="btn-ghost-light">Our Story</a>
       </div>
     </div>
 
@@ -1157,7 +1181,7 @@
   </section>
 
   <!-- ─── MARQUEE BAND ─── -->
-  <div class="marquee-band" aria-hidden="true">
+  <div class="marquee-band" aria-hidden="true" data-views="home">
     <div class="marquee-track">
       <div class="marquee-item"><div class="marquee-diamond"></div>USAPA Approved</div>
       <div class="marquee-item"><div class="marquee-diamond"></div>50,000 Players Worldwide</div>
@@ -1175,7 +1199,7 @@
   </div>
 
   <!-- ─── SHOP ─── -->
-  <section id="shop" aria-labelledby="shop-heading">
+  <section id="shop" aria-labelledby="shop-heading" data-views="home shop">
     <div class="shop-header reveal">
       <div class="shop-title-block">
         <span class="eyebrow">The Collection</span>
@@ -1378,7 +1402,7 @@
   </section>
 
   <!-- ─── ABOUT US ─── -->
-  <section id="about" aria-labelledby="about-heading">
+  <section id="about" aria-labelledby="about-heading" data-views="about">
     <div class="about-left reveal">
       <span class="eyebrow">About Us</span>
       <div class="rule-h" aria-hidden="true"></div>
@@ -1429,7 +1453,7 @@
   </section>
 
   <!-- ─── ABOUT PICKLEBALL ─── -->
-  <section id="pickleball" aria-labelledby="pb-heading">
+  <section id="pickleball" aria-labelledby="pb-heading" data-views="pickleball">
     <div class="pb-intro reveal">
       <div>
         <span class="eyebrow">About Pickleball</span>
@@ -1473,12 +1497,12 @@
   </section>
 
   <!-- ─── CTA BANNER ─── -->
-  <div class="cta-banner" role="complementary" aria-label="Call to action">
+  <div class="cta-banner" role="complementary" aria-label="Call to action" data-views="home">
     <div class="cta-banner-inner reveal">
       <div class="cta-eyebrow">The Collection</div>
       <h2>The Court Awaits.</h2>
       <p>Elevate your game with equipment crafted for those who play with intention.</p>
-      <a href="#shop" class="btn-gold">
+      <a href="#view-shop" data-nav-view="shop" class="btn-gold">
         Explore Collection
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
           <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1488,10 +1512,10 @@
   </div>
 
   <!-- ─── FOOTER ─── -->
-  <footer>
+  <footer data-views="home shop about pickleball">
     <div class="footer-top">
       <div>
-        <a href="#hero" class="footer-brand-name" aria-label="Kiplette Piklette Home">
+        <a href="#view-home" data-nav-view="home" class="footer-brand-name" aria-label="Kiplette Piklette Home">
           Kiplette <em>Piklette</em>
         </a>
         <p class="footer-tagline">
@@ -1502,31 +1526,31 @@
       <div class="footer-col">
         <h4>Collection</h4>
         <ul>
-          <li><a href="#shop">All Products</a></li>
-          <li><a href="#shop">Paddles</a></li>
-          <li><a href="#shop">Balls</a></li>
-          <li><a href="#shop">Accessories</a></li>
-          <li><a href="#shop">Gift Sets</a></li>
+          <li><a href="#view-shop" data-nav-view="shop">All Products</a></li>
+          <li><a href="#view-shop" data-nav-view="shop">Paddles</a></li>
+          <li><a href="#view-shop" data-nav-view="shop">Balls</a></li>
+          <li><a href="#view-shop" data-nav-view="shop">Accessories</a></li>
+          <li><a href="#view-shop" data-nav-view="shop">Gift Sets</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4>Company</h4>
         <ul>
-          <li><a href="#about">Our Story</a></li>
-          <li><a href="#pickleball">About Pickleball</a></li>
-          <li><a href="#about">Careers</a></li>
-          <li><a href="#about">Press & Media</a></li>
+          <li><a href="#view-about" data-nav-view="about">Our Story</a></li>
+          <li><a href="#view-pickleball" data-nav-view="pickleball">About Pickleball</a></li>
+          <li><a href="#view-about" data-nav-view="about">Careers</a></li>
+          <li><a href="#view-about" data-nav-view="about">Press & Media</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4>Support</h4>
         <ul>
-          <li><a href="#about">Shipping Policy</a></li>
-          <li><a href="#about">Returns</a></li>
-          <li><a href="#about">Warranty</a></li>
-          <li><a href="#about">Contact</a></li>
+          <li><a href="#view-about" data-nav-view="about">Shipping Policy</a></li>
+          <li><a href="#view-about" data-nav-view="about">Returns</a></li>
+          <li><a href="#view-about" data-nav-view="about">Warranty</a></li>
+          <li><a href="#view-about" data-nav-view="about">Contact</a></li>
         </ul>
       </div>
     </div>
@@ -1543,6 +1567,71 @@
   </footer>
 
   <script>
+    // ─── VIEW ROUTER ───
+    const VALID_VIEWS = ['home', 'shop', 'about', 'pickleball'];
+
+    function activateView(viewName) {
+      if (!VALID_VIEWS.includes(viewName)) viewName = 'home';
+
+      // Update body data-view for CSS hooks
+      document.body.dataset.view = viewName;
+
+      // Show/hide view-scoped elements
+      document.querySelectorAll('[data-views]').forEach(el => {
+        const belongs = el.dataset.views.split(' ').includes(viewName);
+        if (belongs) {
+          el.classList.remove('view-hidden');
+          el.classList.add('view-fade-in');
+          el.addEventListener('animationend', () => el.classList.remove('view-fade-in'), { once: true });
+        } else {
+          el.classList.add('view-hidden');
+        }
+      });
+
+      // Update active nav link
+      document.querySelectorAll('[data-nav-view]').forEach(a => {
+        a.classList.toggle('nav-active', a.dataset.navView === viewName);
+      });
+
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'instant' });
+
+      // Manage hero video
+      if (viewName === 'home') {
+        heroVideo.play().catch(() => {});
+      } else {
+        heroVideo.pause();
+      }
+
+      // Re-observe any reveal elements that haven't animated yet in this view
+      document.querySelectorAll('.reveal:not(.visible)').forEach(el => revealObserver.observe(el));
+    }
+
+    function getViewFromHash() {
+      const hash = window.location.hash;
+      if (hash.startsWith('#view-')) return hash.replace('#view-', '');
+      return 'home';
+    }
+
+    // ─── INTERCEPT ALL [data-nav-view] LINK CLICKS ───
+    document.addEventListener('click', e => {
+      const link = e.target.closest('[data-nav-view]');
+      if (!link) return;
+      e.preventDefault();
+      const view = link.dataset.navView;
+      history.pushState(null, '', '#view-' + view);
+      activateView(view);
+
+      // Close mobile menu if open
+      navLinks.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      menuBtn.setAttribute('aria-label', 'Open menu');
+    });
+
+    window.addEventListener('popstate', () => {
+      activateView(getViewFromHash());
+    });
+
     // ─── HERO VIDEO: scroll on first end, loop on return ───
     const heroVideo = document.getElementById('heroVideo');
     const heroSection = document.getElementById('hero');
@@ -1556,12 +1645,11 @@
         const target = marquee || document.getElementById('shop');
         target.scrollIntoView({ behavior: 'smooth' });
       }
-      // After first end, always loop
       heroVideo.loop = true;
       heroVideo.play();
     });
 
-    // When user scrolls back to hero after leaving, ensure video is playing
+    // When user scrolls back to hero, ensure video is playing
     const heroObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting && heroVideo.paused) {
@@ -1581,14 +1669,6 @@
       menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     });
 
-    navLinks.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        navLinks.classList.remove('open');
-        menuBtn.setAttribute('aria-expanded', 'false');
-        menuBtn.setAttribute('aria-label', 'Open menu');
-      });
-    });
-
     document.addEventListener('click', e => {
       if (!navLinks.contains(e.target) && !menuBtn.contains(e.target)) {
         navLinks.classList.remove('open');
@@ -1603,16 +1683,16 @@
     }, { passive: true });
 
     // ─── SCROLL REVEAL ───
-    const observer = new IntersectionObserver(entries => {
+    const revealObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
+          revealObserver.unobserve(entry.target);
         }
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
     // ─── PRODUCT FILTER ───
     function filterProducts(cat, btn) {
@@ -1641,6 +1721,9 @@
         }, 1600);
       });
     });
+
+    // ─── INIT: activate view based on current hash (or default home) ───
+    activateView(getViewFromHash());
   </script>
 </body>
 </html>
