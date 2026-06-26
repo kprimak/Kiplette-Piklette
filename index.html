@@ -451,8 +451,7 @@
 
     /* Extra top clearance when section is the first element (no hero above) */
     body[data-view="shop"] #shop,
-    body[data-view="about"] #about,
-    body[data-view="pickleball"] #pickleball {
+    body[data-view="about"] #about {
       padding-top: 152px;
     }
 
@@ -777,60 +776,127 @@
     }
 
     /* ─── ABOUT PICKLEBALL ─── */
-    #pickleball { background: var(--ivory); }
+    #pickleball {
+      background: var(--ivory);
+      padding: 0;
+    }
 
-    .pb-intro {
+    .pb-masthead {
+      background: var(--navy);
+      padding: 112px 56px 88px;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 80px;
-      align-items: end;
-      margin-bottom: 80px;
+      align-items: center;
     }
+
+    body[data-view="pickleball"] .pb-masthead {
+      padding-top: 152px;
+    }
+
+    .pb-masthead-text .section-heading { color: var(--ivory); }
 
     .pb-body {
       font-size: 0.9375rem;
-      color: var(--text-mid);
+      color: rgba(247,244,238,0.68);
       line-height: 1.85;
+      margin-top: 8px;
     }
 
-    .pb-grid {
+    .pb-masthead-court {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.9;
+    }
+
+    /* Editorial rows */
+    .pb-editorial {
+      padding: 0 56px 112px;
+    }
+
+    .pb-row {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: rgba(11,31,58,0.1);
+      grid-template-columns: 120px 1px 1fr 130px;
+      gap: 0 52px;
+      padding: 52px 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: center;
     }
 
-    .pb-card {
-      background: var(--white);
-      padding: 40px 32px;
-      transition: background 250ms ease;
+    .pb-row:first-child {
+      border-top: 1px solid var(--rule);
+      margin-top: 72px;
     }
-    .pb-card:hover { background: var(--cream); }
 
-    .pb-number {
+    .pb-row-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 7rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--gold);
+      opacity: 0.25;
+      line-height: 0.85;
+      text-align: center;
+      user-select: none;
+    }
+
+    .pb-row-rule {
+      align-self: stretch;
+      width: 1px;
+      background: var(--rule);
+    }
+
+    .pb-row-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.9rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--navy);
+      margin-bottom: 12px;
+      line-height: 1.15;
+    }
+
+    .pb-row-body {
+      font-size: 0.9rem;
+      line-height: 1.8;
+      color: var(--text-mid);
+      max-width: 500px;
+    }
+
+    .pb-row-stat {
+      text-align: right;
+      padding-left: 16px;
+    }
+
+    .pb-stat-val {
+      display: block;
       font-family: 'Cormorant Garamond', serif;
       font-size: 3rem;
       font-weight: 300;
-      font-style: italic;
-      color: rgba(184,150,90,0.35);
-      line-height: 1;
-      margin-bottom: 24px;
-      letter-spacing: -0.02em;
-    }
-
-    .pb-card h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem;
-      font-weight: 500;
       color: var(--navy);
-      margin-bottom: 12px;
-      letter-spacing: 0.01em;
+      line-height: 1;
     }
 
-    .pb-card p {
-      font-size: 0.8125rem;
-      color: var(--text-mid);
-      line-height: 1.75;
+    .pb-stat-unit {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--gold);
+      line-height: 1;
+      margin-top: 3px;
+    }
+
+    .pb-stat-label {
+      display: block;
+      font-size: 0.625rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-top: 10px;
     }
 
     /* ─── CTA BANNER ─── */
@@ -1049,7 +1115,7 @@
     /* ─── RESPONSIVE ─── */
     @media (max-width: 1100px) {
       .product-grid { grid-template-columns: repeat(2, 1fr); }
-      .pb-grid { grid-template-columns: repeat(2, 1fr); }
+      .pb-row { grid-template-columns: 100px 1px 1fr 110px; gap: 0 36px; }
       .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
     }
 
@@ -1085,7 +1151,12 @@
       .about-left { padding: 72px 24px; }
       .about-right { min-height: 280px; }
 
-      .pb-intro { grid-template-columns: 1fr; gap: 24px; }
+      .pb-masthead { grid-template-columns: 1fr; gap: 40px; padding: 80px 24px 64px; }
+      body[data-view="pickleball"] .pb-masthead { padding-top: 120px; }
+      .pb-masthead-court { display: none; }
+      .pb-editorial { padding: 0 24px 80px; }
+      .pb-row { grid-template-columns: 72px 1px 1fr; gap: 0 28px; }
+      .pb-row-stat { display: none; }
 
       .cta-banner { padding: 80px 24px; }
       .cta-banner::after { left: 24px; right: 24px; }
@@ -1096,7 +1167,8 @@
 
     @media (max-width: 640px) {
       .product-grid { grid-template-columns: 1fr; }
-      .pb-grid { grid-template-columns: 1fr; }
+      .pb-row { grid-template-columns: 56px 1px 1fr; gap: 0 20px; }
+      .pb-row-num { font-size: 4.5rem; }
       .shop-header { flex-direction: column; align-items: flex-start; }
       .about-stats { grid-template-columns: 1fr 1fr; }
       .footer-top { grid-template-columns: 1fr; }
@@ -1440,43 +1512,115 @@
 
   <!-- ─── ABOUT PICKLEBALL ─── -->
   <section id="pickleball" aria-labelledby="pb-heading" data-views="pickleball">
-    <div class="pb-intro reveal">
-      <div>
+
+    <!-- Full-bleed navy masthead with court illustration -->
+    <div class="pb-masthead">
+      <div class="pb-masthead-text reveal">
         <span class="eyebrow">About Pickleball</span>
         <div class="rule-h" aria-hidden="true"></div>
         <h2 class="section-heading" id="pb-heading">America's Fastest<br><em>Growing Sport</em></h2>
+        <p class="pb-body">
+          Pickleball merges the elegance of tennis, the precision of badminton,
+          and the intimacy of ping-pong. With 36&nbsp;million players and a burgeoning
+          professional circuit, there has never been a finer moment to step onto the court.
+        </p>
       </div>
-      <p class="pb-body">
-        Pickleball merges the elegance of tennis, the precision of badminton,
-        and the intimacy of ping-pong. With 36 million players and a burgeoning
-        professional circuit, there has never been a finer moment to step onto the court.
-      </p>
+
+      <!-- Architectural court diagram -->
+      <div class="pb-masthead-court" aria-hidden="true">
+        <svg viewBox="0 0 520 240" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:480px">
+          <!-- Court field -->
+          <rect x="16" y="20" width="488" height="200" fill="rgba(184,150,90,0.05)" stroke="rgba(184,150,90,0.5)" stroke-width="1.5"/>
+          <!-- Net (center) -->
+          <line x1="260" y1="20" x2="260" y2="220" stroke="rgba(255,255,255,0.55)" stroke-width="2"/>
+          <!-- Net posts -->
+          <circle cx="260" cy="20" r="3.5" fill="rgba(184,150,90,0.7)"/>
+          <circle cx="260" cy="220" r="3.5" fill="rgba(184,150,90,0.7)"/>
+          <!-- Kitchen / NVZ lines (7ft of 22ft = 31.8% from center = ~78px) -->
+          <line x1="182" y1="20" x2="182" y2="220" stroke="rgba(184,150,90,0.35)" stroke-width="1"/>
+          <line x1="338" y1="20" x2="338" y2="220" stroke="rgba(184,150,90,0.35)" stroke-width="1"/>
+          <!-- Centre service lines -->
+          <line x1="16" y1="120" x2="182" y2="120" stroke="rgba(184,150,90,0.25)" stroke-width="1"/>
+          <line x1="338" y1="120" x2="504" y2="120" stroke="rgba(184,150,90,0.25)" stroke-width="1"/>
+          <!-- NVZ labels -->
+          <text x="221" y="124" text-anchor="middle" font-family="Georgia,serif" font-size="8" font-style="italic" fill="rgba(184,150,90,0.38)" letter-spacing="0.08em">NVZ</text>
+          <text x="299" y="124" text-anchor="middle" font-family="Georgia,serif" font-size="8" font-style="italic" fill="rgba(184,150,90,0.38)" letter-spacing="0.08em">NVZ</text>
+          <!-- Corner accent marks -->
+          <polyline points="16,32 16,20 28,20" stroke="rgba(184,150,90,0.65)" stroke-width="1.5" fill="none"/>
+          <polyline points="492,20 504,20 504,32" stroke="rgba(184,150,90,0.65)" stroke-width="1.5" fill="none"/>
+          <polyline points="16,208 16,220 28,220" stroke="rgba(184,150,90,0.65)" stroke-width="1.5" fill="none"/>
+          <polyline points="492,220 504,220 504,208" stroke="rgba(184,150,90,0.65)" stroke-width="1.5" fill="none"/>
+          <!-- Brand name above court -->
+          <text x="260" y="11" text-anchor="middle" font-family="Georgia,serif" font-size="7" fill="rgba(184,150,90,0.28)" letter-spacing="0.3em">KIPLETTE PIKLETTE</text>
+          <!-- Player position dots -->
+          <circle cx="80"  cy="80"  r="5" fill="none" stroke="rgba(184,150,90,0.28)" stroke-width="1"/>
+          <circle cx="80"  cy="160" r="5" fill="none" stroke="rgba(184,150,90,0.28)" stroke-width="1"/>
+          <circle cx="430" cy="80"  r="5" fill="none" stroke="rgba(184,150,90,0.28)" stroke-width="1"/>
+          <circle cx="430" cy="160" r="5" fill="none" stroke="rgba(184,150,90,0.28)" stroke-width="1"/>
+          <!-- Ball (near net) -->
+          <circle cx="250" cy="108" r="7" fill="none" stroke="rgba(184,150,90,0.45)" stroke-width="1"/>
+          <circle cx="250" cy="108" r="2" fill="rgba(184,150,90,0.3)"/>
+        </svg>
+      </div>
     </div>
 
-    <div class="pb-grid" role="list">
+    <!-- Editorial list rows -->
+    <div class="pb-editorial">
 
-      <div class="pb-card reveal" role="listitem">
-        <div class="pb-number" aria-hidden="true">01</div>
-        <h3>Swift to Master</h3>
-        <p>Most players rally within 30 minutes of their first session. The underhand serve and compact court make the sport immediately accessible to all ages.</p>
+      <div class="pb-row reveal">
+        <div class="pb-row-num" aria-hidden="true">01</div>
+        <div class="pb-row-rule" aria-hidden="true"></div>
+        <div class="pb-row-main">
+          <h3 class="pb-row-title">Swift to Master</h3>
+          <p class="pb-row-body">Most players rally within 30 minutes of their first session. The underhand serve and compact court make the sport immediately accessible to all ages.</p>
+        </div>
+        <div class="pb-row-stat" aria-hidden="true">
+          <span class="pb-stat-val">30</span>
+          <span class="pb-stat-unit">min</span>
+          <span class="pb-stat-label">to first rally</span>
+        </div>
       </div>
 
-      <div class="pb-card reveal reveal-delay-1" role="listitem">
-        <div class="pb-number" aria-hidden="true">02</div>
-        <h3>Inherently Social</h3>
-        <p>The compact court keeps players close. Whether singles or doubles, pickleball fosters a unique camaraderie rarely found in other racquet sports.</p>
+      <div class="pb-row reveal">
+        <div class="pb-row-num" aria-hidden="true">02</div>
+        <div class="pb-row-rule" aria-hidden="true"></div>
+        <div class="pb-row-main">
+          <h3 class="pb-row-title">Inherently Social</h3>
+          <p class="pb-row-body">The compact court keeps players close. Whether singles or doubles, pickleball fosters a unique camaraderie rarely found in other racquet sports.</p>
+        </div>
+        <div class="pb-row-stat" aria-hidden="true">
+          <span class="pb-stat-val">4</span>
+          <span class="pb-stat-unit">players</span>
+          <span class="pb-stat-label">per court</span>
+        </div>
       </div>
 
-      <div class="pb-card reveal reveal-delay-2" role="listitem">
-        <div class="pb-number" aria-hidden="true">03</div>
-        <h3>Peak Conditioning</h3>
-        <p>400–600 calories per hour. Low joint impact with high cardiovascular return — the ideal sport for sustained fitness at any level.</p>
+      <div class="pb-row reveal">
+        <div class="pb-row-num" aria-hidden="true">03</div>
+        <div class="pb-row-rule" aria-hidden="true"></div>
+        <div class="pb-row-main">
+          <h3 class="pb-row-title">Peak Conditioning</h3>
+          <p class="pb-row-body">400–600 calories per hour. Low joint impact with high cardiovascular return — the ideal sport for sustained fitness at any level.</p>
+        </div>
+        <div class="pb-row-stat" aria-hidden="true">
+          <span class="pb-stat-val">600</span>
+          <span class="pb-stat-unit">cal / hr</span>
+          <span class="pb-stat-label">avg. burn</span>
+        </div>
       </div>
 
-      <div class="pb-card reveal reveal-delay-3" role="listitem">
-        <div class="pb-number" aria-hidden="true">04</div>
-        <h3>A Growing Circuit</h3>
-        <p>From local club leagues to USAPA national championships, the competitive ladder rewards dedication and welcomes players of all ambitions.</p>
+      <div class="pb-row reveal">
+        <div class="pb-row-num" aria-hidden="true">04</div>
+        <div class="pb-row-rule" aria-hidden="true"></div>
+        <div class="pb-row-main">
+          <h3 class="pb-row-title">A Growing Circuit</h3>
+          <p class="pb-row-body">From local club leagues to USAPA national championships, the competitive ladder rewards dedication and welcomes players of all ambitions.</p>
+        </div>
+        <div class="pb-row-stat" aria-hidden="true">
+          <span class="pb-stat-val">36M</span>
+          <span class="pb-stat-unit">players</span>
+          <span class="pb-stat-label">worldwide</span>
+        </div>
       </div>
 
     </div>
