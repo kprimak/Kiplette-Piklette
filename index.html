@@ -715,64 +715,19 @@
     }
 
     .about-right {
-      background: var(--navy);
       position: relative;
       overflow: hidden;
       min-height: 560px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: flex-end;
     }
 
-    .about-right-bg {
+    .about-right img {
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(ellipse 70% 50% at 30% 30%, rgba(184,150,90,0.1) 0%, transparent 70%),
-        linear-gradient(135deg, #0B1F3A 0%, #16325C 100%);
-    }
-
-    .about-right-monogram {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(8rem, 18vw, 14rem);
-      font-weight: 300;
-      font-style: italic;
-      color: rgba(184,150,90,0.07);
-      line-height: 1;
-      user-select: none;
-      letter-spacing: -0.04em;
-      white-space: nowrap;
-    }
-
-    .about-right-badge {
-      position: relative;
-      z-index: 2;
-      padding: 28px 36px;
-      text-align: right;
-    }
-
-    .about-right-badge p {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 0.875rem;
-      font-weight: 400;
-      font-style: italic;
-      color: rgba(247,244,238,0.45);
-      letter-spacing: 0.04em;
-    }
-
-    .about-right-badge strong {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
       display: block;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-      font-weight: 500;
-      font-style: normal;
-      color: var(--gold-light);
-      letter-spacing: 0.08em;
-      margin-top: 4px;
     }
 
     /* ─── ABOUT PICKLEBALL ─── */
@@ -1509,13 +1464,8 @@
       </div>
     </div>
 
-    <div class="about-right" aria-hidden="true">
-      <div class="about-right-bg"></div>
-      <div class="about-right-monogram">KP</div>
-      <div class="about-right-badge">
-        <p>Founded in</p>
-        <strong>Est. 2021</strong>
-      </div>
+    <div class="about-right">
+      <img src="Gemini_Generated_Image_t7r5k2t7r5k2t7r5.png" alt="Two Kiplette Piklette paddles">
     </div>
   </section>
 
