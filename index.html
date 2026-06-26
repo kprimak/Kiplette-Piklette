@@ -646,54 +646,68 @@
     /* ─── ABOUT US ─── */
     #about {
       background: var(--white);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      padding: 0;
+      padding: 112px 56px;
+      text-align: center;
     }
 
-    .about-left {
-      padding: 112px 64px 112px 56px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
+    .about-header .rule-h { margin-left: auto; margin-right: auto; }
 
     .about-pullquote {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+      font-size: clamp(1.375rem, 2.2vw, 1.875rem);
       font-weight: 300;
       font-style: italic;
-      line-height: 1.5;
+      line-height: 1.6;
       color: var(--navy);
-      border-left: 2px solid var(--gold);
-      padding-left: 28px;
-      margin: 32px 0 40px;
+      max-width: 660px;
+      margin: 0 auto 64px;
       letter-spacing: 0.01em;
+    }
+
+    .about-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      max-width: 880px;
+      margin: 0 auto 72px;
+      text-align: left;
     }
 
     .about-body {
       font-size: 0.9375rem;
       color: var(--text-mid);
       line-height: 1.85;
-      max-width: 520px;
     }
-
-    .about-body + .about-body { margin-top: 16px; }
 
     .about-stats {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-      margin-top: 52px;
-      padding-top: 40px;
-      border-top: 1px solid rgba(11,31,58,0.08);
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      max-width: 880px;
+      margin: 0 auto;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      padding: 44px 0;
+    }
+
+    .about-stat {
+      position: relative;
+      text-align: center;
+      padding: 0 16px;
+    }
+
+    .about-stat + .about-stat::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 10%; height: 80%;
+      width: 1px;
+      background: var(--rule);
     }
 
     .about-stat-num {
       font-family: 'Cormorant Garamond', serif;
       font-size: 2.75rem;
-      font-weight: 400;
+      font-weight: 300;
       color: var(--navy);
       line-height: 1;
       letter-spacing: -0.02em;
@@ -706,73 +720,12 @@
     }
 
     .about-stat-label {
-      font-size: 0.65rem;
+      font-size: 0.625rem;
       font-weight: 500;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--text-light);
-      margin-top: 6px;
-    }
-
-    .about-right {
-      background: var(--navy);
-      position: relative;
-      overflow: hidden;
-      min-height: 560px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: flex-end;
-    }
-
-    .about-right-bg {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 70% 50% at 30% 30%, rgba(184,150,90,0.1) 0%, transparent 70%),
-        linear-gradient(135deg, #0B1F3A 0%, #16325C 100%);
-    }
-
-    .about-right-monogram {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(8rem, 18vw, 14rem);
-      font-weight: 300;
-      font-style: italic;
-      color: rgba(184,150,90,0.07);
-      line-height: 1;
-      user-select: none;
-      letter-spacing: -0.04em;
-      white-space: nowrap;
-    }
-
-    .about-right-badge {
-      position: relative;
-      z-index: 2;
-      padding: 28px 36px;
-      text-align: right;
-    }
-
-    .about-right-badge p {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 0.875rem;
-      font-weight: 400;
-      font-style: italic;
-      color: rgba(247,244,238,0.45);
-      letter-spacing: 0.04em;
-    }
-
-    .about-right-badge strong {
-      display: block;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-      font-weight: 500;
-      font-style: normal;
-      color: var(--gold-light);
-      letter-spacing: 0.08em;
-      margin-top: 4px;
+      margin-top: 10px;
     }
 
     /* ─── ABOUT PICKLEBALL ─── */
@@ -1153,12 +1106,8 @@
       #hero { padding: 0 24px; }
       .hero-scroll-cue { left: 24px; }
 
-      #about {
-        grid-template-columns: 1fr;
-        padding: 0;
-      }
-      .about-left { padding: 72px 24px; }
-      .about-right { min-height: 280px; }
+      #about { padding: 80px 24px; }
+      .about-columns { grid-template-columns: 1fr; gap: 32px; }
 
       .pb-masthead { grid-template-columns: 1fr; gap: 40px; padding: 80px 24px 64px; }
       body[data-view="pickleball"] .pb-masthead { padding-top: 120px; }
@@ -1468,53 +1417,37 @@
 
   <!-- ─── ABOUT US ─── -->
   <section id="about" aria-labelledby="about-heading" data-views="about">
-    <div class="about-left reveal">
+    <div class="about-header reveal">
       <span class="eyebrow">About Us</span>
       <div class="rule-h" aria-hidden="true"></div>
-      <h2 class="section-heading" id="about-heading">The Game,<br><em>Refined</em></h2>
-
-      <blockquote class="about-pullquote">
-        "We refused to accept that high-performance had to look like a neon advertisement."
-      </blockquote>
-
-      <p class="about-body">
-        When we looked at the current landscape of pickleball, we saw a sport with immense
-        potential but a visual identity that felt adrift. While pickleball was celebrated as
-        the modern evolution of tennis, it seemed to have traded the court's historic elegance
-        for neon palettes, frantic patterns, and tacky designs.
-      </p>
-      <p class="about-body">
-        We wanted something different — something classy, chic, and timeless. And that's how
-        we founded Kiplette, because for us, the game is not merely about the rally. It is
-        about the poise you carry while playing it.
-      </p>
-
-      <div class="about-stats" aria-label="Company highlights">
-        <div>
-          <div class="about-stat-num">50K<em>+</em></div>
-          <div class="about-stat-label">Players Worldwide</div>
-        </div>
-        <div>
-          <div class="about-stat-num">4.9<em>★</em></div>
-          <div class="about-stat-label">Average Rating</div>
-        </div>
-        <div>
-          <div class="about-stat-num">200<em>+</em></div>
-          <div class="about-stat-label">Hours Court Tested</div>
-        </div>
-        <div>
-          <div class="about-stat-num">USAPA</div>
-          <div class="about-stat-label">Certified</div>
-        </div>
-      </div>
+      <h2 class="section-heading" id="about-heading">The Game, <em>Refined</em></h2>
     </div>
 
-    <div class="about-right" aria-hidden="true">
-      <div class="about-right-bg"></div>
-      <div class="about-right-monogram">KP</div>
-      <div class="about-right-badge">
-        <p>Founded in</p>
-        <strong>Est. 2021</strong>
+    <blockquote class="about-pullquote reveal">
+      "We refused to accept that high-performance had to look like a neon advertisement."
+    </blockquote>
+
+    <div class="about-columns reveal">
+      <p class="about-body">When we looked at the current landscape of pickleball, we saw a sport with immense potential but a visual identity that felt adrift. While pickleball was celebrated as the modern evolution of tennis, it seemed to have traded the court's historic elegance for neon palettes, frantic patterns, and tacky designs.</p>
+      <p class="about-body">We wanted something different — something classy, chic, and timeless. And that's how we founded Kiplette, because for us, the game is not merely about the rally. It is about the poise you carry while playing it.</p>
+    </div>
+
+    <div class="about-stats reveal" aria-label="Company highlights">
+      <div class="about-stat">
+        <div class="about-stat-num">50K<em>+</em></div>
+        <div class="about-stat-label">Players Worldwide</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-stat-num">4.9<em>★</em></div>
+        <div class="about-stat-label">Average Rating</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-stat-num">200<em>+</em></div>
+        <div class="about-stat-label">Hours Court Tested</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-stat-num">USAPA</div>
+        <div class="about-stat-label">Certified</div>
       </div>
     </div>
   </section>
