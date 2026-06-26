@@ -965,6 +965,166 @@
       outline-offset: 4px;
     }
 
+    /* ─── PRODUCT MODAL ─── */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(11,31,58,0.55);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 280ms ease;
+    }
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .modal {
+      background: var(--white);
+      max-width: 900px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      transform: translateY(16px);
+      transition: transform 280ms ease;
+    }
+    .modal-backdrop.open .modal {
+      transform: translateY(0);
+    }
+    .modal-img-panel {
+      background: var(--cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 420px;
+      position: relative;
+      overflow: hidden;
+    }
+    .modal-img-panel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      inset: 0;
+    }
+    .modal-img-panel svg {
+      width: 60%;
+      height: auto;
+    }
+    .modal-tag {
+      position: absolute;
+      top: 20px; left: 20px;
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .modal-body {
+      padding: 52px 48px;
+      display: flex;
+      flex-direction: column;
+    }
+    .modal-category {
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 12px;
+    }
+    .modal-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.25rem;
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+    }
+    .modal-rule {
+      display: block;
+      width: 36px;
+      height: 1px;
+      background: var(--gold);
+      margin: 20px 0 24px;
+    }
+    .modal-desc {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      line-height: 1.85;
+      flex: 1;
+    }
+    .modal-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 400;
+      color: var(--navy);
+      margin-top: 32px;
+      margin-bottom: 24px;
+      letter-spacing: 0.01em;
+    }
+    .modal-price sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      vertical-align: middle;
+      margin-left: 4px;
+    }
+    .modal-add-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--navy);
+      color: var(--ivory);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      border: none;
+      padding: 16px 32px;
+      cursor: pointer;
+      min-height: 52px;
+      transition: background 250ms ease;
+      width: 100%;
+    }
+    .modal-add-btn:hover { background: var(--navy-mid); }
+    .modal-close {
+      position: absolute;
+      top: 16px; right: 16px;
+      width: 40px; height: 40px;
+      background: none;
+      border: 1px solid rgba(11,31,58,0.12);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-mid);
+      transition: all 200ms ease;
+      z-index: 10;
+    }
+    .modal-close:hover {
+      background: var(--navy);
+      color: var(--white);
+      border-color: var(--navy);
+    }
+    @media (max-width: 700px) {
+      .modal { grid-template-columns: 1fr; }
+      .modal-img-panel { min-height: 260px; }
+      .modal-body { padding: 36px 28px; }
+    }
+
     /* ─── FOOTER ─── */
     footer {
       background: var(--navy);
@@ -1237,7 +1397,9 @@
     <div class="product-grid" id="productGrid" role="list">
 
       <!-- Paddle 1 -->
-      <article class="product-card reveal" data-category="paddle" role="listitem" tabindex="0" aria-label="Kiplette Pro Carbon, $149">
+      <article class="product-card reveal" data-category="paddle" role="listitem" tabindex="0" aria-label="Kiplette Pro Carbon, $149"
+        data-name="Kiplette Pro Carbon" data-cat="Performance Paddle" data-price="$149 <sub>incl. shipping</sub>" data-tag="New Season"
+        data-desc="T700 raw carbon fibre face with 16mm polypropylene honeycomb core. Engineered for maximum spin and commanding power. Featuring an edge guard for durability and a cushioned grip for extended play sessions. USAPA approved for tournament play.">
         <div class="product-tag">New Season</div>
         <div class="product-img-wrap">
           <svg width="120" height="160" viewBox="0 0 120 160" fill="none" aria-hidden="true">
@@ -1272,7 +1434,9 @@
       </article>
 
       <!-- Paddle 2 -->
-      <article class="product-card reveal reveal-delay-1" data-category="paddle" role="listitem" tabindex="0" aria-label="Elite Glass Fibre paddle, $119">
+      <article class="product-card reveal reveal-delay-1" data-category="paddle" role="listitem" tabindex="0" aria-label="Elite Glass Fibre paddle, $119"
+        data-name="Elite Glass Fibre" data-cat="Control Paddle" data-price="$119" data-tag=""
+        data-desc="Fiberglass face with 13mm polypropylene core. Exceptional touch and all-court control for the discerning player seeking finesse. The textured surface provides consistent spin while the balanced weight distribution ensures effortless manoeuvrability.">
         <div class="product-img-wrap">
           <svg width="120" height="160" viewBox="0 0 120 160" fill="none" aria-hidden="true">
             <ellipse cx="60" cy="64" rx="42" ry="54" fill="none" stroke="rgba(11,31,58,0.12)" stroke-width="1.5"/>
@@ -1302,7 +1466,9 @@
       </article>
 
       <!-- Paddle 3 -->
-      <article class="product-card reveal reveal-delay-2" data-category="paddle" role="listitem" tabindex="0" aria-label="Lite Composite paddle, $89">
+      <article class="product-card reveal reveal-delay-2" data-category="paddle" role="listitem" tabindex="0" aria-label="Lite Composite paddle, $89"
+        data-name="Lite Composite" data-cat="Entry Paddle" data-price="$89" data-tag="Best Seller"
+        data-desc="Lightweight composite at 7.6oz. Tournament quality feel for new players who refuse to compromise on standard. The forgiving sweet spot and vibration-dampening core make every shot feel effortless from your very first session.">
         <div class="product-tag">Best Seller</div>
         <div class="product-img-wrap">
           <svg width="120" height="160" viewBox="0 0 120 160" fill="none" aria-hidden="true">
@@ -1333,7 +1499,9 @@
       </article>
 
       <!-- Balls -->
-      <article class="product-card reveal" data-category="ball" role="listitem" tabindex="0" aria-label="Tournament Balls 6-Pack, $24">
+      <article class="product-card reveal" data-category="ball" role="listitem" tabindex="0" aria-label="Tournament Balls 6-Pack, $24"
+        data-name="Tournament Balls" data-cat="Balls" data-price="$24 <sub>6-pack</sub>" data-tag=""
+        data-desc="USAPA-approved outdoor balls. 40-hole design for true flight and consistent bounce in every condition. Seamless rotational moulding ensures perfect spherical accuracy, while the hard polymer shell holds up through thousands of rallies.">
         <div class="product-img-wrap">
           <svg width="120" height="120" viewBox="0 0 120 120" fill="none" aria-hidden="true">
             <circle cx="60" cy="60" r="42" fill="none" stroke="rgba(11,31,58,0.12)" stroke-width="1.5"/>
@@ -1365,7 +1533,9 @@
       </article>
 
       <!-- Bag -->
-      <article class="product-card reveal reveal-delay-1" data-category="accessory" role="listitem" tabindex="0" aria-label="Tournament Bag, $59">
+      <article class="product-card reveal reveal-delay-1" data-category="accessory" role="listitem" tabindex="0" aria-label="Tournament Bag, $59"
+        data-name="Tournament Bag" data-cat="Accessories" data-price="$59" data-tag=""
+        data-desc="Holds 2 paddles, 6 balls, and all essentials. Ventilated pockets, padded straps, and a waterproof canvas base. The dedicated paddle compartment is lined with soft felt to protect your paddle face during transport to and from the court.">
         <div class="product-img-wrap">
           <svg width="140" height="120" viewBox="0 0 140 120" fill="none" aria-hidden="true">
             <rect x="24" y="38" width="92" height="64" rx="6" fill="rgba(11,31,58,0.05)" stroke="rgba(11,31,58,0.12)" stroke-width="1.5"/>
@@ -1391,7 +1561,9 @@
       </article>
 
       <!-- Grip Tape -->
-      <article class="product-card reveal reveal-delay-2" data-category="accessory" role="listitem" tabindex="0" aria-label="Grip Tape Set, $16">
+      <article class="product-card reveal reveal-delay-2" data-category="accessory" role="listitem" tabindex="0" aria-label="Grip Tape Set, $16"
+        data-name="Grip Tape Set" data-cat="Accessories" data-price="$16 <sub>3-pack</sub>" data-tag="New"
+        data-desc="Premium tacky overgrip. Sweat-absorbing, textured, ultra-thin 0.6mm profile for uncompromised feel. Wraps cleanly without bunching and stays secure through the longest sessions. Available in navy, ivory, and gold to match your aesthetic on court.">
         <div class="product-tag">New</div>
         <div class="product-img-wrap">
           <svg width="80" height="140" viewBox="0 0 80 140" fill="none" aria-hidden="true">
@@ -1576,6 +1748,33 @@
 
     </div>
   </section>
+
+  <!-- ─── PRODUCT MODAL ─── -->
+  <div class="modal-backdrop" id="productModal" role="dialog" aria-modal="true" aria-labelledby="modalName">
+    <div class="modal">
+      <button class="modal-close" id="modalClose" aria-label="Close">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <div class="modal-img-panel" id="modalImgPanel">
+        <span class="modal-tag" id="modalTag"></span>
+      </div>
+      <div class="modal-body">
+        <div class="modal-category" id="modalCategory"></div>
+        <h2 class="modal-name" id="modalName"></h2>
+        <span class="modal-rule"></span>
+        <p class="modal-desc" id="modalDesc"></p>
+        <div class="modal-price" id="modalPrice"></div>
+        <button class="modal-add-btn" id="modalAddBtn">
+          Add to Cart
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- ─── CTA BANNER ─── -->
   <div class="cta-banner" role="complementary" aria-label="Call to action" data-views="home">
@@ -1802,6 +2001,73 @@
           this.disabled = false;
         }, 1600);
       });
+    });
+
+    // ─── PRODUCT MODAL ───
+    const productModal = document.getElementById('productModal');
+    const modalClose = document.getElementById('modalClose');
+    const modalImgPanel = document.getElementById('modalImgPanel');
+    const modalTag = document.getElementById('modalTag');
+    const modalCategory = document.getElementById('modalCategory');
+    const modalName = document.getElementById('modalName');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalPrice = document.getElementById('modalPrice');
+    const modalAddBtn = document.getElementById('modalAddBtn');
+
+    function openModal(card) {
+      const d = card.dataset;
+      modalTag.textContent = d.tag || '';
+      modalTag.style.display = d.tag ? '' : 'none';
+      modalCategory.textContent = d.cat;
+      modalName.textContent = d.name;
+      modalDesc.textContent = d.desc;
+      modalPrice.innerHTML = d.price;
+
+      // Clone image from card (SVG or img)
+      const imgWrap = card.querySelector('.product-img-wrap');
+      const existingMedia = modalImgPanel.querySelector('img, svg:not(#modalTag ~ *)');
+      if (existingMedia) existingMedia.remove();
+      const realImg = imgWrap.querySelector('img');
+      if (realImg) {
+        const clone = realImg.cloneNode(true);
+        clone.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;';
+        modalImgPanel.appendChild(clone);
+      } else {
+        const svgClone = imgWrap.querySelector('svg').cloneNode(true);
+        svgClone.removeAttribute('aria-hidden');
+        svgClone.style.cssText = 'width:55%;height:auto;position:relative;z-index:1;';
+        modalImgPanel.appendChild(svgClone);
+      }
+
+      productModal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      modalClose.focus();
+    }
+
+    function closeModal() {
+      productModal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.product-card').forEach(card => {
+      card.addEventListener('click', e => {
+        if (e.target.closest('.add-btn')) return;
+        openModal(card);
+      });
+      card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(card); }
+      });
+    });
+
+    modalClose.addEventListener('click', closeModal);
+    productModal.addEventListener('click', e => { if (e.target === productModal) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    modalAddBtn.addEventListener('click', function() {
+      const orig = this.innerHTML;
+      this.innerHTML = 'Added to Cart &nbsp;✓';
+      this.style.background = '#16325C';
+      setTimeout(() => { this.innerHTML = orig; this.style.background = ''; }, 1800);
     });
 
     // ─── INIT: activate view based on current hash (or default home) ───
