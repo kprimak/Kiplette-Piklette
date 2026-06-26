@@ -814,60 +814,45 @@
     .pb-features-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 2px;
-      background: var(--cream);
-      margin-top: 2px;
+      gap: 1px;
+      background: rgba(184,150,90,0.22);
+      margin-top: 1px;
     }
 
     .pb-feature-card {
       background: var(--white);
-      padding: 56px 52px 52px;
-      position: relative;
-      overflow: hidden;
+      padding: 52px 48px 48px;
       display: flex;
       flex-direction: column;
     }
 
-    .pb-feature-card::before {
-      content: attr(data-num);
-      position: absolute;
-      right: -8px;
-      bottom: -24px;
+    .pb-card-num {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 14rem;
+      font-size: 3rem;
       font-weight: 300;
       font-style: italic;
-      color: rgba(184,150,90,0.065);
+      color: var(--gold);
       line-height: 1;
-      pointer-events: none;
-      user-select: none;
+      display: block;
+      margin-bottom: 16px;
     }
 
-    .pb-feature-card::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 52px; right: 52px;
+    .pb-card-rule {
+      display: block;
+      width: 36px;
       height: 1px;
       background: var(--gold);
-      opacity: 0.5;
-    }
-
-    .pb-card-num {
-      font-size: 0.6875rem;
-      font-weight: 500;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--gold);
       margin-bottom: 24px;
+      opacity: 0.6;
     }
 
     .pb-card-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 2rem;
+      font-size: 1.875rem;
       font-weight: 400;
       color: var(--navy);
       line-height: 1.15;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
     .pb-card-title em { font-style: italic; font-weight: 300; }
 
@@ -879,29 +864,29 @@
     }
 
     .pb-card-stat {
-      margin-top: 36px;
-      padding-top: 24px;
-      border-top: 1px solid rgba(184,150,90,0.2);
+      margin-top: 32px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(184,150,90,0.18);
       display: flex;
       align-items: baseline;
       gap: 8px;
     }
     .pb-card-stat-val {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 2.5rem;
+      font-size: 2.25rem;
       font-weight: 300;
       color: var(--navy);
       line-height: 1;
     }
     .pb-card-stat-unit {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1rem;
+      font-size: 0.9375rem;
       font-weight: 300;
       font-style: italic;
       color: var(--gold);
     }
     .pb-card-stat-label {
-      font-size: 0.625rem;
+      font-size: 0.6rem;
       font-weight: 500;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -1574,8 +1559,9 @@
     <!-- Clean 2×2 feature cards -->
     <div class="pb-features-grid">
 
-      <div class="pb-feature-card reveal" data-num="01">
-        <div class="pb-card-num">01</div>
+      <div class="pb-feature-card reveal">
+        <span class="pb-card-num">01</span>
+        <span class="pb-card-rule" aria-hidden="true"></span>
         <h3 class="pb-card-title">Swift to <em>Master</em></h3>
         <p class="pb-card-body">Most players rally within 30 minutes of their first session. The underhand serve and compact court make the sport immediately accessible to all ages and skill levels.</p>
         <div class="pb-card-stat">
@@ -1585,8 +1571,9 @@
         </div>
       </div>
 
-      <div class="pb-feature-card reveal" data-num="02">
-        <div class="pb-card-num">02</div>
+      <div class="pb-feature-card reveal">
+        <span class="pb-card-num">02</span>
+        <span class="pb-card-rule" aria-hidden="true"></span>
         <h3 class="pb-card-title">Inherently <em>Social</em></h3>
         <p class="pb-card-body">The compact court keeps players close. Whether singles or doubles, pickleball fosters a unique camaraderie rarely found in other racquet sports.</p>
         <div class="pb-card-stat">
@@ -1596,8 +1583,9 @@
         </div>
       </div>
 
-      <div class="pb-feature-card reveal" data-num="03">
-        <div class="pb-card-num">03</div>
+      <div class="pb-feature-card reveal">
+        <span class="pb-card-num">03</span>
+        <span class="pb-card-rule" aria-hidden="true"></span>
         <h3 class="pb-card-title">Peak <em>Conditioning</em></h3>
         <p class="pb-card-body">400–600 calories per hour. Low joint impact with high cardiovascular return — the ideal sport for sustained fitness and longevity at any level.</p>
         <div class="pb-card-stat">
@@ -1607,8 +1595,9 @@
         </div>
       </div>
 
-      <div class="pb-feature-card reveal" data-num="04">
-        <div class="pb-card-num">04</div>
+      <div class="pb-feature-card reveal">
+        <span class="pb-card-num">04</span>
+        <span class="pb-card-rule" aria-hidden="true"></span>
         <h3 class="pb-card-title">A Growing <em>Circuit</em></h3>
         <p class="pb-card-body">From local club leagues to USAPA national championships, the competitive ladder rewards dedication and welcomes players of every ambition.</p>
         <div class="pb-card-stat">
