@@ -189,6 +189,7 @@
       object-position: center center;
       z-index: 1;
       display: block;
+      filter: blur(0.4px);
     }
 
     /* Elegant navy + ivory gradient fallback (behind video) */
@@ -1623,6 +1624,9 @@
     const heroSection = document.getElementById('hero');
     const marquee = document.querySelector('.marquee-band');
     let hasEnded = false;
+
+    heroVideo.playbackRate = 0.75;
+    heroVideo.addEventListener('canplay', () => { heroVideo.playbackRate = 0.75; }, { once: true });
 
     heroVideo.addEventListener('ended', () => {
       if (!hasEnded) {
