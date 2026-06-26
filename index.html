@@ -965,113 +965,123 @@
       outline-offset: 4px;
     }
 
-    /* ─── PRODUCT MODAL ─── */
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(11,31,58,0.55);
-      z-index: 200;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 280ms ease;
-    }
-    .modal-backdrop.open {
-      opacity: 1;
-      pointer-events: all;
-    }
-    .modal {
+    /* ─── PRODUCT DETAIL PAGE ─── */
+    #product-detail {
       background: var(--white);
-      max-width: 900px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
+      min-height: 100vh;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      position: relative;
-      transform: translateY(16px);
-      transition: transform 280ms ease;
+      padding-top: 80px;
     }
-    .modal-backdrop.open .modal {
-      transform: translateY(0);
-    }
-    .modal-img-panel {
+
+    .pd-img-panel {
       background: var(--cream);
+      position: sticky;
+      top: 80px;
+      height: calc(100vh - 80px);
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 420px;
-      position: relative;
       overflow: hidden;
     }
-    .modal-img-panel img {
+
+    .pd-img-panel img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       position: absolute;
       inset: 0;
     }
-    .modal-img-panel svg {
-      width: 60%;
+
+    .pd-img-panel svg {
+      width: 55%;
       height: auto;
+      position: relative;
+      z-index: 1;
     }
-    .modal-tag {
+
+    .pd-tag {
       position: absolute;
-      top: 20px; left: 20px;
+      top: 24px; left: 24px;
       font-size: 0.6rem;
       font-weight: 500;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--gold);
+      z-index: 2;
     }
-    .modal-body {
-      padding: 52px 48px;
+
+    .pd-body {
+      padding: 72px 64px 80px 72px;
       display: flex;
       flex-direction: column;
     }
-    .modal-category {
+
+    .pd-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      margin-bottom: 52px;
+      transition: color 200ms ease;
+    }
+    .pd-back:hover { color: var(--navy); }
+    .pd-back svg { transition: transform 200ms ease; }
+    .pd-back:hover svg { transform: translateX(-3px); }
+
+    .pd-category {
       font-size: 0.6rem;
       font-weight: 500;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--text-light);
-      margin-bottom: 12px;
+      color: var(--gold);
+      margin-bottom: 16px;
     }
-    .modal-name {
+
+    .pd-name {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 2.25rem;
+      font-size: clamp(2.5rem, 4vw, 3.75rem);
       font-weight: 400;
       color: var(--navy);
-      line-height: 1.15;
+      line-height: 1.1;
       letter-spacing: -0.01em;
-      margin-bottom: 6px;
     }
-    .modal-rule {
+
+    .pd-name em { font-style: italic; font-weight: 300; }
+
+    .pd-rule {
       display: block;
-      width: 36px;
+      width: 48px;
       height: 1px;
       background: var(--gold);
-      margin: 20px 0 24px;
+      margin: 28px 0 32px;
     }
-    .modal-desc {
-      font-size: 0.9rem;
+
+    .pd-desc {
+      font-size: 0.9375rem;
       color: var(--text-mid);
-      line-height: 1.85;
-      flex: 1;
+      line-height: 1.9;
+      max-width: 480px;
     }
-    .modal-price {
+
+    .pd-price {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 2rem;
-      font-weight: 400;
+      font-size: 2.5rem;
+      font-weight: 300;
       color: var(--navy);
-      margin-top: 32px;
-      margin-bottom: 24px;
-      letter-spacing: 0.01em;
+      margin-top: 48px;
+      letter-spacing: -0.01em;
     }
-    .modal-price sub {
+
+    .pd-price sub {
       font-family: 'Inter', sans-serif;
       font-size: 0.6rem;
       font-weight: 500;
@@ -1079,9 +1089,17 @@
       text-transform: uppercase;
       color: var(--text-light);
       vertical-align: middle;
-      margin-left: 4px;
+      margin-left: 6px;
     }
-    .modal-add-btn {
+
+    .pd-actions {
+      display: flex;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .pd-add-btn {
+      flex: 1;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -1093,36 +1111,17 @@
       letter-spacing: 0.2em;
       text-transform: uppercase;
       border: none;
-      padding: 16px 32px;
+      padding: 18px 32px;
       cursor: pointer;
-      min-height: 52px;
+      min-height: 56px;
       transition: background 250ms ease;
-      width: 100%;
     }
-    .modal-add-btn:hover { background: var(--navy-mid); }
-    .modal-close {
-      position: absolute;
-      top: 16px; right: 16px;
-      width: 40px; height: 40px;
-      background: none;
-      border: 1px solid rgba(11,31,58,0.12);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-mid);
-      transition: all 200ms ease;
-      z-index: 10;
-    }
-    .modal-close:hover {
-      background: var(--navy);
-      color: var(--white);
-      border-color: var(--navy);
-    }
-    @media (max-width: 700px) {
-      .modal { grid-template-columns: 1fr; }
-      .modal-img-panel { min-height: 260px; }
-      .modal-body { padding: 36px 28px; }
+    .pd-add-btn:hover { background: var(--navy-mid); }
+
+    @media (max-width: 900px) {
+      #product-detail { grid-template-columns: 1fr; }
+      .pd-img-panel { position: relative; top: 0; height: 56vw; min-height: 280px; }
+      .pd-body { padding: 48px 24px 64px; }
     }
 
     /* ─── FOOTER ─── */
@@ -1749,24 +1748,25 @@
     </div>
   </section>
 
-  <!-- ─── PRODUCT MODAL ─── -->
-  <div class="modal-backdrop" id="productModal" role="dialog" aria-modal="true" aria-labelledby="modalName">
-    <div class="modal">
-      <button class="modal-close" id="modalClose" aria-label="Close">
+  <!-- ─── PRODUCT DETAIL PAGE ─── -->
+  <section id="product-detail" aria-labelledby="pdName" data-views="product">
+    <div class="pd-img-panel" id="pdImgPanel">
+      <span class="pd-tag" id="pdTag"></span>
+    </div>
+    <div class="pd-body">
+      <button class="pd-back" id="pdBack">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-          <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M12 7H2M6 11L2 7l4-4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
+        Back to Shop
       </button>
-      <div class="modal-img-panel" id="modalImgPanel">
-        <span class="modal-tag" id="modalTag"></span>
-      </div>
-      <div class="modal-body">
-        <div class="modal-category" id="modalCategory"></div>
-        <h2 class="modal-name" id="modalName"></h2>
-        <span class="modal-rule"></span>
-        <p class="modal-desc" id="modalDesc"></p>
-        <div class="modal-price" id="modalPrice"></div>
-        <button class="modal-add-btn" id="modalAddBtn">
+      <div class="pd-category" id="pdCategory"></div>
+      <h1 class="pd-name" id="pdName"></h1>
+      <span class="pd-rule"></span>
+      <p class="pd-desc" id="pdDesc"></p>
+      <div class="pd-price" id="pdPrice"></div>
+      <div class="pd-actions">
+        <button class="pd-add-btn" id="pdAddBtn">
           Add to Cart
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
             <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1774,7 +1774,7 @@
         </button>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- ─── CTA BANNER ─── -->
   <div class="cta-banner" role="complementary" aria-label="Call to action" data-views="home">
@@ -1848,7 +1848,7 @@
 
   <script>
     // ─── VIEW ROUTER ───
-    const VALID_VIEWS = ['home', 'shop', 'about', 'pickleball'];
+    const VALID_VIEWS = ['home', 'shop', 'about', 'pickleball', 'product'];
 
     function activateView(viewName) {
       if (!VALID_VIEWS.includes(viewName)) viewName = 'home';
@@ -2003,67 +2003,62 @@
       });
     });
 
-    // ─── PRODUCT MODAL ───
-    const productModal = document.getElementById('productModal');
-    const modalClose = document.getElementById('modalClose');
-    const modalImgPanel = document.getElementById('modalImgPanel');
-    const modalTag = document.getElementById('modalTag');
-    const modalCategory = document.getElementById('modalCategory');
-    const modalName = document.getElementById('modalName');
-    const modalDesc = document.getElementById('modalDesc');
-    const modalPrice = document.getElementById('modalPrice');
-    const modalAddBtn = document.getElementById('modalAddBtn');
+    // ─── PRODUCT DETAIL PAGE ───
+    const pdImgPanel = document.getElementById('pdImgPanel');
+    const pdTag      = document.getElementById('pdTag');
+    const pdCategory = document.getElementById('pdCategory');
+    const pdName     = document.getElementById('pdName');
+    const pdDesc     = document.getElementById('pdDesc');
+    const pdPrice    = document.getElementById('pdPrice');
+    const pdAddBtn   = document.getElementById('pdAddBtn');
+    const pdBack     = document.getElementById('pdBack');
+    let prevView = 'shop';
 
-    function openModal(card) {
+    function openProductPage(card) {
       const d = card.dataset;
-      modalTag.textContent = d.tag || '';
-      modalTag.style.display = d.tag ? '' : 'none';
-      modalCategory.textContent = d.cat;
-      modalName.textContent = d.name;
-      modalDesc.textContent = d.desc;
-      modalPrice.innerHTML = d.price;
+      pdTag.textContent = d.tag || '';
+      pdTag.style.display = d.tag ? '' : 'none';
+      pdCategory.textContent = d.cat;
+      pdName.textContent = d.name;
+      pdDesc.textContent = d.desc;
+      pdPrice.innerHTML = d.price;
 
-      // Clone image from card (SVG or img)
+      // Populate image panel
+      const existing = pdImgPanel.querySelector('img, svg:not(.pd-tag)');;
+      if (existing) existing.remove();
       const imgWrap = card.querySelector('.product-img-wrap');
-      const existingMedia = modalImgPanel.querySelector('img, svg:not(#modalTag ~ *)');
-      if (existingMedia) existingMedia.remove();
       const realImg = imgWrap.querySelector('img');
       if (realImg) {
         const clone = realImg.cloneNode(true);
         clone.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;';
-        modalImgPanel.appendChild(clone);
+        pdImgPanel.appendChild(clone);
       } else {
-        const svgClone = imgWrap.querySelector('svg').cloneNode(true);
-        svgClone.removeAttribute('aria-hidden');
-        svgClone.style.cssText = 'width:55%;height:auto;position:relative;z-index:1;';
-        modalImgPanel.appendChild(svgClone);
+        const svg = imgWrap.querySelector('svg').cloneNode(true);
+        svg.removeAttribute('aria-hidden');
+        pdImgPanel.appendChild(svg);
       }
 
-      productModal.classList.add('open');
-      document.body.style.overflow = 'hidden';
-      modalClose.focus();
+      prevView = document.body.dataset.view || 'shop';
+      history.pushState(null, '', '#view-product');
+      activateView('product');
     }
 
-    function closeModal() {
-      productModal.classList.remove('open');
-      document.body.style.overflow = '';
-    }
+    pdBack.addEventListener('click', () => {
+      history.pushState(null, '', '#view-' + prevView);
+      activateView(prevView);
+    });
 
     document.querySelectorAll('.product-card').forEach(card => {
       card.addEventListener('click', e => {
         if (e.target.closest('.add-btn')) return;
-        openModal(card);
+        openProductPage(card);
       });
       card.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(card); }
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openProductPage(card); }
       });
     });
 
-    modalClose.addEventListener('click', closeModal);
-    productModal.addEventListener('click', e => { if (e.target === productModal) closeModal(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
-    modalAddBtn.addEventListener('click', function() {
+    pdAddBtn.addEventListener('click', function() {
       const orig = this.innerHTML;
       this.innerHTML = 'Added to Cart &nbsp;✓';
       this.style.background = '#16325C';
