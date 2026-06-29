@@ -994,7 +994,14 @@
       pointer-events: all;
     }
 
-    .product-img-wrap img,
+    .product-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      padding: 20px;
+      transition: opacity 200ms ease;
+    }
     .product-img-wrap svg {
       transition: opacity 200ms ease;
     }
@@ -1460,9 +1467,9 @@
         data-desc="T700 raw carbon fibre face with 16mm polypropylene honeycomb core. Engineered for maximum spin and commanding power. Featuring an edge guard for durability and a cushioned grip for extended play sessions. USAPA approved for tournament play.">
         <div class="product-tag">New Season</div>
         <div class="product-img-wrap">
-          <img src="Nice.png" alt="Kiplette Pro Carbon paddle" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
-          <img src="Final.png" alt="Kiplette Pro Carbon paddle" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
-          <img src="ChatGPT Image Jun 28, 2026, 07_30_42 PM.png" alt="Kiplette Pro Carbon paddle" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+          <img src="Nice.png" alt="Kiplette Pro Carbon paddle">
+          <img src="Final.png" alt="Kiplette Pro Carbon paddle">
+          <img src="ChatGPT Image Jun 28, 2026, 07_30_42 PM.png" alt="Kiplette Pro Carbon paddle">
         </div>
         <div class="product-info">
           <div class="product-category">Performance Paddle</div>
