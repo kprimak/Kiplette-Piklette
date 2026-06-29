@@ -2130,6 +2130,7 @@
         items.forEach((el, i) => el.classList.toggle('hidden-img', i !== idx));
         dotsEl.querySelectorAll('.img-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
         current = idx;
+        card._currentImgIdx = idx;
       }
       showSlide(0);
 
@@ -2223,9 +2224,10 @@
       });
 
       pdTotal = sources.length;
-      pdCurrent = 0;
+      pdCurrent = card._currentImgIdx || 0;
       pdSlider.style.transition = 'none';
-      pdSlider.style.transform = 'translateX(0)';
+      pdSlider.style.transform = `translateX(-${pdCurrent * 100}%)`;
+      pdDotsEl.querySelectorAll('.pd-dot').forEach((d, i) => d.classList.toggle('active', i === pdCurrent));
       requestAnimationFrame(() => { pdSlider.style.transition = ''; });
 
       const multi = pdTotal > 1;
