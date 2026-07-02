@@ -2214,6 +2214,7 @@
         slide.className = 'pd-slide';
         const clone = el.cloneNode(true);
         clone.removeAttribute('class');
+        clone.removeAttribute('style');
         slide.appendChild(clone);
         pdSlider.appendChild(slide);
 
