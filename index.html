@@ -1975,28 +1975,31 @@
           <h3 class="preorder-form-heading">Reserve Your Place</h3>
           <p class="preorder-form-sub">We'll get your details and send you a priority link to order as soon as the item becomes available.</p>
           <form class="preorder-form" id="preorderForm" novalidate>
+            <input type="hidden" name="access_key" value="f0438d1e-5b2b-4804-95fa-abd05ab5b5f7">
+            <input type="hidden" name="subject" value="New Kiplette Pre-order">
+            <input type="hidden" name="from_name" value="Kiplette Pre-order Form">
             <div class="preorder-row">
               <div class="preorder-field">
                 <label class="preorder-label">First Name</label>
-                <input class="preorder-input" type="text" placeholder="First name" required autocomplete="given-name">
+                <input class="preorder-input" type="text" name="first_name" placeholder="First name" required autocomplete="given-name">
               </div>
               <div class="preorder-field">
                 <label class="preorder-label">Last Name</label>
-                <input class="preorder-input" type="text" placeholder="Last name" required autocomplete="family-name">
+                <input class="preorder-input" type="text" name="last_name" placeholder="Last name" required autocomplete="family-name">
               </div>
             </div>
             <div class="preorder-field">
               <label class="preorder-label">Email</label>
-              <input class="preorder-input" type="email" placeholder="your@email.com" required autocomplete="email">
+              <input class="preorder-input" type="email" name="email" placeholder="your@email.com" required autocomplete="email">
             </div>
             <div class="preorder-row">
               <div class="preorder-field">
                 <label class="preorder-label">Phone Number</label>
-                <input class="preorder-input" type="tel" placeholder="+1 234 567 8900" autocomplete="tel">
+                <input class="preorder-input" type="tel" name="phone" placeholder="+1 234 567 8900" autocomplete="tel">
               </div>
               <div class="preorder-field">
                 <label class="preorder-label">Postal Code</label>
-                <input class="preorder-input" type="text" placeholder="Postal code" autocomplete="postal-code">
+                <input class="preorder-input" type="text" name="postal_code" placeholder="Postal code" autocomplete="postal-code">
               </div>
             </div>
             <button type="submit" class="preorder-submit">Confirm Pre-order</button>
@@ -2884,10 +2887,35 @@
 
     document.getElementById('preorderClose').addEventListener('click', closePreorderModal);
 
-    document.getElementById('preorderForm').addEventListener('submit', e => {
+    document.getElementById('preorderForm').addEventListener('submit', async e => {
       e.preventDefault();
-      document.getElementById('preorderForm').style.display = 'none';
-      document.getElementById('preorderSuccess').style.display = 'flex';
+      const form = e.target;
+      const btn = form.querySelector('.preorder-submit');
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      const preorderItems = cart.filter(item => PRE_ORDER_ITEMS.has(item.name));
+      const itemsSummary = preorderItems.map(i => `${i.name} x${i.qty}`).join(', ');
+
+      const data = new FormData(form);
+      data.append('items', itemsSummary);
+
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
+        const json = await res.json();
+        if (json.success) {
+          form.style.display = 'none';
+          document.getElementById('preorderSuccess').style.display = 'flex';
+        } else {
+          btn.disabled = false;
+          btn.textContent = 'Confirm Pre-order';
+          alert('Something went wrong. Please try again.');
+        }
+      } catch {
+        btn.disabled = false;
+        btn.textContent = 'Confirm Pre-order';
+        alert('Network error. Please try again.');
+      }
     });
 
     document.getElementById('cartCheckoutBtn').addEventListener('click', () => {
