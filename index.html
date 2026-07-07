@@ -79,6 +79,12 @@
       box-shadow: 0 1px 24px rgba(11,31,58,0.07);
     }
 
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+    }
+
     .nav-logo {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.5rem;
@@ -1636,6 +1642,7 @@
       <span style="color:var(--gold)">Kiplette</span>
     </a>
 
+    <div class="nav-right">
     <ul class="nav-links" id="navLinks" role="list">
       <li><a href="#view-home" data-nav-view="home">Home</a></li>
       <li><a href="#view-shop" data-nav-view="shop">Shop All</a></li>
@@ -1651,6 +1658,8 @@
       </svg>
       <span class="cart-badge" id="cartBadge" aria-live="polite" aria-label="items in basket">0</span>
     </button>
+
+    </div><!-- /.nav-right -->
 
     <button class="nav-hamburger" id="menuBtn"
       aria-controls="navLinks" aria-expanded="false" aria-label="Open menu">
