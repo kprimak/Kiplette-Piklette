@@ -2272,7 +2272,7 @@
           </form>
           <div id="preorderSuccess" class="preorder-success" style="display:none">
             <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><circle cx="24" cy="24" r="22" stroke="var(--gold)" stroke-width="2"/><path d="M14 24l8 8 12-14" stroke="var(--gold)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <p>You're on the list.<br>We'll be in touch soon.</p>
+            <p>You're on the list! We will send you a priority link to order as soon as the item becomes available.</p>
           </div>
         </div>
       </div>
@@ -3284,6 +3284,8 @@
         const json = await res.json();
         if (json.success) {
           form.style.display = 'none';
+          form.closest('.preorder-right-content').querySelector('.preorder-form-heading').style.display = 'none';
+          form.closest('.preorder-right-content').querySelector('.preorder-form-sub').style.display = 'none';
           document.getElementById('preorderSuccess').style.display = 'flex';
         } else {
           btn.disabled = false;
@@ -3309,6 +3311,7 @@
         const json = await res.json();
         if (json.success) {
           form.style.display = 'none';
+          document.querySelector('.contact-header').style.display = 'none';
           document.getElementById('contactSuccess').style.display = 'flex';
         } else {
           btn.disabled = false;
