@@ -1110,6 +1110,114 @@
     }
     .cart-empty a:hover { border-color: var(--gold); }
 
+    /* ─── CONTACT PAGE ─── */
+    #contact { background: var(--ivory); min-height: 100vh; }
+    .contact-wrap {
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 80px 24px 120px;
+    }
+    .contact-header { margin-bottom: 48px; }
+    .contact-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      font-weight: 300;
+      color: var(--navy);
+      line-height: 1.1;
+      margin: 16px 0 20px;
+    }
+    .contact-title em { font-style: italic; color: var(--gold); }
+    .contact-intro {
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+    .contact-form { display: flex; flex-direction: column; gap: 20px; }
+    .contact-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .contact-field { display: flex; flex-direction: column; gap: 6px; }
+    .contact-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+    }
+    .contact-optional { font-weight: 400; text-transform: none; letter-spacing: 0; font-size: 0.7rem; }
+    .contact-input {
+      height: 46px;
+      padding: 0 14px;
+      border: 1px solid var(--cream);
+      background: var(--white);
+      color: var(--text-dark);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      border-radius: 2px;
+      outline: none;
+      transition: border-color 200ms ease;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .contact-input::placeholder { color: var(--text-light); }
+    .contact-input:focus { border-color: var(--gold); }
+    .contact-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; cursor: pointer; }
+    .contact-textarea { height: auto; padding: 12px 14px; resize: vertical; }
+    .contact-radio-group { display: flex; gap: 10px; flex-wrap: wrap; }
+    .contact-radio-label { cursor: pointer; }
+    .contact-radio-label input[type="radio"] { display: none; }
+    .contact-radio-btn {
+      display: inline-block;
+      padding: 8px 20px;
+      border: 1px solid var(--cream);
+      border-radius: 2px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      background: var(--white);
+      transition: border-color 200ms ease, color 200ms ease, background 200ms ease;
+    }
+    .contact-radio-label input[type="radio"]:checked + .contact-radio-btn {
+      border-color: var(--navy);
+      background: var(--navy);
+      color: var(--ivory);
+    }
+    .contact-submit {
+      height: 50px;
+      background: var(--navy);
+      color: var(--white);
+      border: none;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-top: 6px;
+      transition: background 250ms ease;
+      border-radius: 2px;
+    }
+    .contact-submit:hover { background: #162d52; }
+    .contact-success {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      text-align: center;
+      padding: 60px 0;
+    }
+    .contact-success svg { width: 56px; height: 56px; }
+    .contact-success-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--navy);
+    }
+    .contact-success-text { font-size: 0.9rem; color: var(--text-mid); line-height: 1.6; }
+    @media (max-width: 540px) {
+      .contact-row { grid-template-columns: 1fr; }
+    }
+
     /* ─── ABOUT US ─── */
     #about {
       background: var(--white);
@@ -2499,6 +2607,82 @@
     </div>
   </section>
 
+  <!-- ─── CONTACT ─── -->
+  <section id="contact" aria-labelledby="contact-heading" data-views="contact">
+    <div class="contact-wrap reveal">
+      <div class="contact-header">
+        <span class="eyebrow">Get in Touch</span>
+        <div class="rule-h" aria-hidden="true"></div>
+        <h1 id="contact-heading" class="contact-title">Contact <em>Us</em></h1>
+        <p class="contact-intro">If you have any questions, whether about policies, warranty, style or just fit, don't hesitate to ask — our team is happy to help! Please allow between 1–2 business days for our team to get back to you.</p>
+      </div>
+      <form class="contact-form" id="contactForm" novalidate>
+        <input type="hidden" name="access_key" value="f0438d1e-5b2b-4804-95fa-abd05ab5b5f7">
+        <input type="hidden" name="subject" value="Kiplette Customer Inquiry">
+        <input type="hidden" name="from_name" value="Kiplette Contact Form">
+        <div class="contact-row">
+          <div class="contact-field">
+            <label class="contact-label">First Name</label>
+            <input class="contact-input" type="text" name="first_name" placeholder="First name" required autocomplete="given-name">
+          </div>
+          <div class="contact-field">
+            <label class="contact-label">Last Name</label>
+            <input class="contact-input" type="text" name="last_name" placeholder="Last name" required autocomplete="family-name">
+          </div>
+        </div>
+        <div class="contact-field">
+          <label class="contact-label">Email</label>
+          <input class="contact-input" type="email" name="email" placeholder="your@email.com" required autocomplete="email">
+        </div>
+        <div class="contact-field">
+          <label class="contact-label">Phone Number</label>
+          <input class="contact-input" type="tel" name="phone" placeholder="+1 234 567 8900" autocomplete="tel">
+        </div>
+        <div class="contact-field">
+          <label class="contact-label">Type of Inquiry</label>
+          <select class="contact-input contact-select" name="inquiry_type" required>
+            <option value="" disabled selected>Select a topic…</option>
+            <option value="Shipping & Delivery">Shipping &amp; Delivery</option>
+            <option value="Returns & Exchanges">Returns &amp; Exchanges</option>
+            <option value="Warranty">Warranty</option>
+            <option value="Product Question">Product Question</option>
+            <option value="Sizing & Fit">Sizing &amp; Fit</option>
+            <option value="Order Status">Order Status</option>
+            <option value="Pre-order">Pre-order</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="contact-field">
+          <label class="contact-label">Additional Information <span class="contact-optional">(optional)</span></label>
+          <textarea class="contact-input contact-textarea" name="message" placeholder="Tell us anything else that might help us assist you…" rows="4"></textarea>
+        </div>
+        <div class="contact-field">
+          <label class="contact-label">Preferred Contact Method</label>
+          <div class="contact-radio-group">
+            <label class="contact-radio-label">
+              <input type="radio" name="preferred_contact" value="Email" checked>
+              <span class="contact-radio-btn">Email</span>
+            </label>
+            <label class="contact-radio-label">
+              <input type="radio" name="preferred_contact" value="Phone">
+              <span class="contact-radio-btn">Phone</span>
+            </label>
+            <label class="contact-radio-label">
+              <input type="radio" name="preferred_contact" value="Text">
+              <span class="contact-radio-btn">Text</span>
+            </label>
+          </div>
+        </div>
+        <button type="submit" class="contact-submit">Send Message</button>
+      </form>
+      <div id="contactSuccess" class="contact-success" style="display:none">
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><circle cx="24" cy="24" r="22" stroke="var(--gold)" stroke-width="2"/><path d="M14 24l8 8 12-14" stroke="var(--gold)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h2 class="contact-success-heading">Message Received</h2>
+        <p class="contact-success-text">Thank you for reaching out. Our team will get back to you within 1–2 business days.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- ─── CTA BANNER ─── -->
   <div class="cta-banner" role="complementary" aria-label="Call to action" data-views="home">
     <div class="cta-banner-inner reveal">
@@ -2553,7 +2737,7 @@
           <li><a href="#view-about" data-nav-view="about">Shipping Policy</a></li>
           <li><a href="#view-about" data-nav-view="about">Returns</a></li>
           <li><a href="#view-about" data-nav-view="about">Warranty</a></li>
-          <li><a href="#view-about" data-nav-view="about">Contact</a></li>
+          <li><a href="#view-contact" data-nav-view="contact">Contact</a></li>
         </ul>
       </div>
     </div>
@@ -2571,7 +2755,7 @@
 
   <script>
     // ─── VIEW ROUTER ───
-    const VALID_VIEWS = ['home', 'shop', 'about', 'pickleball', 'product'];
+    const VALID_VIEWS = ['home', 'shop', 'about', 'pickleball', 'product', 'contact'];
 
     function activateView(viewName) {
       if (!VALID_VIEWS.includes(viewName)) viewName = 'home';
@@ -2914,6 +3098,31 @@
       } catch {
         btn.disabled = false;
         btn.textContent = 'Confirm Pre-order';
+        alert('Network error. Please try again.');
+      }
+    });
+
+    document.getElementById('contactForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      const form = e.target;
+      const btn = form.querySelector('.contact-submit');
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      const data = new FormData(form);
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
+        const json = await res.json();
+        if (json.success) {
+          form.style.display = 'none';
+          document.getElementById('contactSuccess').style.display = 'flex';
+        } else {
+          btn.disabled = false;
+          btn.textContent = 'Send Message';
+          alert('Something went wrong. Please try again.');
+        }
+      } catch {
+        btn.disabled = false;
+        btn.textContent = 'Send Message';
         alert('Network error. Please try again.');
       }
     });
