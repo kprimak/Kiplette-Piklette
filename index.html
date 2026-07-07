@@ -2651,6 +2651,7 @@
       pdDotsEl.classList.toggle('hidden', !multi);
 
       prevView = document.body.dataset.view || 'shop';
+      sessionStorage.setItem('kiplette-product', d.name);
       history.pushState(null, '', '#view-product');
       activateView('product');
     }
@@ -2679,7 +2680,20 @@
     });
 
     // ─── INIT: activate view based on current hash (or default home) ───
-    activateView(getViewFromHash());
+    (function init() {
+      const view = getViewFromHash();
+      if (view === 'product') {
+        const savedName = sessionStorage.getItem('kiplette-product');
+        const card = savedName
+          ? Array.from(document.querySelectorAll('.product-card')).find(c => c.dataset.name === savedName)
+          : null;
+        if (card) { openProductPage(card); return; }
+        history.replaceState(null, '', '#view-shop');
+        activateView('shop');
+      } else {
+        activateView(view);
+      }
+    })();
   </script>
 </body>
 </html>
