@@ -66,7 +66,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 56px;
+      padding: 0 56px 0 20px;
       height: 80px;
       background: rgba(255,255,255,0.97);
       border-bottom: 1px solid rgba(184,150,90,0.2);
@@ -78,6 +78,78 @@
       background: rgba(255,255,255,0.98);
       box-shadow: 0 1px 24px rgba(11,31,58,0.07);
     }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .nav-side-btn {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 6px 4px;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .nav-side-btn span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--gold);
+      border-radius: 1px;
+      transition: opacity 200ms ease;
+    }
+    .nav-side-btn:hover span { opacity: 0.7; }
+
+    /* ─── SIDE PANEL ─── */
+    #sidePanelOverlay {
+      position: fixed; inset: 0;
+      background: rgba(11,31,58,0.4);
+      z-index: 9998;
+      opacity: 0; pointer-events: none;
+      transition: opacity 300ms ease;
+    }
+    #sidePanelOverlay.open { opacity: 1; pointer-events: all; }
+    #sidePanel {
+      position: fixed;
+      top: 80px; left: 0; bottom: 0;
+      width: 280px;
+      background: var(--navy);
+      z-index: 9999;
+      transform: translateX(-100%);
+      transition: transform 340ms cubic-bezier(0.4, 0, 0.2, 1);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    #sidePanel.open { transform: translateX(0); }
+    .side-panel-nav {
+      display: flex;
+      flex-direction: column;
+      padding: 16px 0 40px;
+    }
+    .side-panel-link {
+      display: block;
+      padding: 15px 28px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(247,244,238,0.8);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: color 200ms ease, background 200ms ease;
+      background: none; border-top: none; cursor: pointer;
+      width: 100%; text-align: left;
+    }
+    .side-panel-link:hover { color: var(--gold); background: rgba(184,150,90,0.07); }
 
     .nav-right {
       display: flex;
@@ -2007,9 +2079,14 @@
 
   <!-- ─── NAVIGATION ─── -->
   <nav id="nav" role="navigation" aria-label="Main navigation">
-    <a href="#view-home" data-nav-view="home" class="nav-logo" aria-label="Kiplette — Home">
-      <span style="color:var(--gold)">Kiplette</span>
-    </a>
+    <div class="nav-left">
+      <button class="nav-side-btn" id="sidePanelBtn" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="#view-home" data-nav-view="home" class="nav-logo" aria-label="Kiplette — Home">
+        <span style="color:var(--gold)">Kiplette</span>
+      </a>
+    </div>
 
     <div class="nav-right">
     <ul class="nav-links" id="navLinks" role="list">
@@ -2035,6 +2112,18 @@
       <span></span><span></span><span></span>
     </button>
   </nav>
+
+  <!-- ─── SIDE PANEL ─── -->
+  <div id="sidePanelOverlay" aria-hidden="true"></div>
+  <div id="sidePanel" aria-hidden="true">
+    <nav class="side-panel-nav" aria-label="Site navigation">
+      <a href="#view-shop" data-nav-view="shop" class="side-panel-link" data-close-panel>Shop All</a>
+      <a href="#view-about" data-nav-view="about" class="side-panel-link" data-close-panel>About Us</a>
+      <a href="#view-pickleball" data-nav-view="pickleball" class="side-panel-link" data-close-panel>About Pickleball</a>
+      <a href="#view-contact" data-nav-view="contact" class="side-panel-link" data-close-panel>Contact Us</a>
+      <a href="#view-about" data-nav-view="about" class="side-panel-link" data-close-panel>Support</a>
+    </nav>
+  </div>
 
   <!-- ─── CART DRAWER ─── -->
   <div id="cartOverlay" aria-hidden="true"></div>
@@ -2847,6 +2936,32 @@
       });
     }, { threshold: 0.5 });
     heroObserver.observe(heroSection);
+
+    // ─── SIDE PANEL ───
+    const sidePanelBtn = document.getElementById('sidePanelBtn');
+    const sidePanel = document.getElementById('sidePanel');
+    const sidePanelOverlay = document.getElementById('sidePanelOverlay');
+
+    function openSidePanel() {
+      sidePanel.classList.add('open');
+      sidePanel.setAttribute('aria-hidden', 'false');
+      sidePanelOverlay.classList.add('open');
+      sidePanelBtn.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeSidePanel() {
+      sidePanel.classList.remove('open');
+      sidePanel.setAttribute('aria-hidden', 'true');
+      sidePanelOverlay.classList.remove('open');
+      sidePanelBtn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    sidePanelBtn.addEventListener('click', openSidePanel);
+    sidePanelOverlay.addEventListener('click', closeSidePanel);
+    document.querySelectorAll('[data-close-panel]').forEach(el => {
+      el.addEventListener('click', closeSidePanel);
+    });
 
     // ─── MOBILE NAV ───
     const menuBtn = document.getElementById('menuBtn');
