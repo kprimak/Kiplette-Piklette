@@ -888,6 +888,175 @@
       color: var(--gold);
       margin-top: 2px;
     }
+    /* ─── PRE-ORDER MODAL ─── */
+    #preorderModal {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      display: flex;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 280ms ease;
+    }
+    #preorderModal.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .preorder-inner {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transform: scale(0.94);
+      transition: transform 380ms cubic-bezier(0.34, 1.4, 0.64, 1);
+    }
+    #preorderModal.open .preorder-inner { transform: scale(1); }
+    .preorder-left {
+      width: 38%;
+      background: var(--navy);
+      padding: 56px 48px;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      flex-shrink: 0;
+    }
+    .preorder-left-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 300;
+      color: var(--ivory);
+      line-height: 1.15;
+      margin-bottom: 32px;
+    }
+    .preorder-left-heading em { color: var(--gold); font-style: italic; }
+    .preorder-items-list { display: flex; flex-direction: column; gap: 16px; }
+    .preorder-modal-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(184,150,90,0.2);
+      border-radius: 4px;
+    }
+    .preorder-modal-thumb {
+      width: 52px;
+      height: 52px;
+      object-fit: cover;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+    .preorder-modal-item-name {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--ivory);
+      letter-spacing: 0.01em;
+      margin-bottom: 3px;
+    }
+    .preorder-modal-item-meta {
+      font-size: 0.72rem;
+      color: var(--gold-light);
+      letter-spacing: 0.04em;
+    }
+    .preorder-right {
+      flex: 1;
+      background: var(--ivory);
+      overflow-y: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 56px 48px;
+    }
+    .preorder-right-content { width: 100%; max-width: 420px; }
+    .preorder-form-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.9rem;
+      font-weight: 400;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+    .preorder-form-sub {
+      font-size: 0.82rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+    .preorder-form { display: flex; flex-direction: column; gap: 16px; }
+    .preorder-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .preorder-field { display: flex; flex-direction: column; gap: 6px; }
+    .preorder-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+    }
+    .preorder-input {
+      height: 44px;
+      border: 1px solid var(--cream);
+      background: var(--white);
+      padding: 0 14px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      color: var(--text-dark);
+      outline: none;
+      transition: border-color 200ms ease;
+      border-radius: 2px;
+    }
+    .preorder-input:focus { border-color: var(--gold); }
+    .preorder-input::placeholder { color: var(--text-light); }
+    .preorder-submit {
+      height: 50px;
+      background: var(--navy);
+      color: var(--white);
+      border: none;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-top: 6px;
+      transition: background 250ms ease;
+      border-radius: 2px;
+    }
+    .preorder-submit:hover { background: var(--navy-mid); }
+    .preorder-close {
+      position: absolute;
+      top: 24px;
+      right: 28px;
+      background: none;
+      border: none;
+      font-size: 1.3rem;
+      color: var(--text-mid);
+      cursor: pointer;
+      z-index: 10;
+      line-height: 1;
+      padding: 4px;
+      transition: color 200ms ease;
+    }
+    .preorder-close:hover { color: var(--navy); }
+    .preorder-success {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      text-align: center;
+      padding: 32px 0;
+    }
+    .preorder-success svg { width: 56px; height: 56px; }
+    .preorder-success p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.5;
+    }
+    @media (max-width: 640px) {
+      .preorder-inner { flex-direction: column; }
+      .preorder-left { width: 100%; padding: 36px 24px 28px; flex-shrink: 0; }
+      .preorder-right { padding: 32px 24px 48px; align-items: flex-start; }
+      .preorder-row { grid-template-columns: 1fr; }
+    }
     .cart-empty {
       flex: 1;
       display: none;
@@ -1759,6 +1928,56 @@
     </div>
   </aside>
 
+  <!-- ─── PRE-ORDER MODAL ─── -->
+  <div id="preorderModal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="preorderTitle">
+    <div class="preorder-inner">
+      <button class="preorder-close" id="preorderClose" aria-label="Close pre-order">&#x2715;</button>
+      <div class="preorder-left">
+        <span class="eyebrow" style="color:var(--gold-light)">Pre-order</span>
+        <div class="rule-h" aria-hidden="true" style="border-color:rgba(212,180,131,0.3);margin:16px 0 24px;"></div>
+        <h2 class="preorder-left-heading" id="preorderTitle">Your<br><em>Selection</em></h2>
+        <div id="preorderItemsList" class="preorder-items-list"></div>
+      </div>
+      <div class="preorder-right">
+        <div class="preorder-right-content">
+          <h3 class="preorder-form-heading">Reserve Your Place</h3>
+          <p class="preorder-form-sub">We'll get your details and send you a priority link to order as soon as the item becomes available.</p>
+          <form class="preorder-form" id="preorderForm" novalidate>
+            <div class="preorder-row">
+              <div class="preorder-field">
+                <label class="preorder-label">First Name</label>
+                <input class="preorder-input" type="text" placeholder="First name" required autocomplete="given-name">
+              </div>
+              <div class="preorder-field">
+                <label class="preorder-label">Last Name</label>
+                <input class="preorder-input" type="text" placeholder="Last name" required autocomplete="family-name">
+              </div>
+            </div>
+            <div class="preorder-field">
+              <label class="preorder-label">Email</label>
+              <input class="preorder-input" type="email" placeholder="your@email.com" required autocomplete="email">
+            </div>
+            <div class="preorder-row">
+              <div class="preorder-field">
+                <label class="preorder-label">Phone Number</label>
+                <input class="preorder-input" type="tel" placeholder="+1 234 567 8900" autocomplete="tel">
+              </div>
+              <div class="preorder-field">
+                <label class="preorder-label">Postal Code</label>
+                <input class="preorder-input" type="text" placeholder="Postal code" autocomplete="postal-code">
+              </div>
+            </div>
+            <button type="submit" class="preorder-submit">Confirm Pre-order</button>
+          </form>
+          <div id="preorderSuccess" class="preorder-success" style="display:none">
+            <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><circle cx="24" cy="24" r="22" stroke="var(--gold)" stroke-width="2"/><path d="M14 24l8 8 12-14" stroke="var(--gold)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <p>You're on the list.<br>We'll be in touch soon.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ─── HERO ─── -->
   <section id="hero" aria-label="Hero" data-views="home">
     <video id="heroVideo" class="hero-video" autoplay muted playsinline aria-hidden="true">
@@ -2591,9 +2810,47 @@
     document.getElementById('cartOverlay').addEventListener('click', closeCart);
     document.getElementById('cartContinueShopping').addEventListener('click', closeCart);
 
+    function openPreorderModal() {
+      const listEl = document.getElementById('preorderItemsList');
+      listEl.innerHTML = '';
+      cart.filter(item => PRE_ORDER_ITEMS.has(item.name)).forEach(item => {
+        const thumbSrc = item.imgSrc || getProductImg(item.name);
+        const el = document.createElement('div');
+        el.className = 'preorder-modal-item';
+        el.innerHTML = `
+          ${thumbSrc ? `<img class="preorder-modal-thumb" src="${thumbSrc}" alt="${item.name}">` : ''}
+          <div>
+            <div class="preorder-modal-item-name">${item.name}</div>
+            <div class="preorder-modal-item-meta">Qty ${item.qty} &nbsp;·&nbsp; $${Number.isInteger(item.priceNum) ? item.priceNum : item.priceNum.toFixed(2)}</div>
+          </div>`;
+        listEl.appendChild(el);
+      });
+      document.getElementById('preorderForm').style.display = '';
+      document.getElementById('preorderSuccess').style.display = 'none';
+      const modal = document.getElementById('preorderModal');
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePreorderModal() {
+      const modal = document.getElementById('preorderModal');
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('preorderClose').addEventListener('click', closePreorderModal);
+
+    document.getElementById('preorderForm').addEventListener('submit', e => {
+      e.preventDefault();
+      document.getElementById('preorderForm').style.display = 'none';
+      document.getElementById('preorderSuccess').style.display = 'flex';
+    });
+
     document.getElementById('cartCheckoutBtn').addEventListener('click', () => {
       if (cart.length === 0) return;
-      if (cartPreOrderMode) return;
+      if (cartPreOrderMode) { openPreorderModal(); return; }
       outOfStockNames = new Set();
       cart.forEach(item => {
         if (!PRE_ORDER_ITEMS.has(item.name)) outOfStockNames.add(item.name);
