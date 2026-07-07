@@ -869,8 +869,9 @@
       margin-bottom: 14px;
       line-height: 1.5;
     }
+    .cart-item.out-of-stock { background: rgba(180,180,180,0.13); }
     .cart-item.out-of-stock .cart-item-name { color: #c0392b; }
-    .cart-item.out-of-stock .cart-item-thumb { opacity: 0.45; }
+    .cart-item.out-of-stock .cart-item-thumb { opacity: 0.35; }
     .cart-item-oos-tag {
       font-size: 0.62rem;
       font-weight: 600;
@@ -2447,8 +2448,7 @@
     // ─── CART ───
     let cart = JSON.parse(localStorage.getItem('kiplette-cart') || '[]');
     const PRE_ORDER_ITEMS = new Set([
-      'White Starter Pack', 'Charcoal Black Kit', 'Navy Starter Pack',
-      'White Tournament Bag', 'Charcoal Black Tournament Bag', 'Kiplette Pro Carbon', 'Lite Composite'
+      'White Starter Pack', 'Navy Starter Pack', 'Lite Composite', 'Tournament Balls'
     ]);
     let outOfStockNames = new Set();
     let cartPreOrderMode = false;
