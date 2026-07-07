@@ -880,6 +880,14 @@
       color: #c0392b;
       margin-top: 2px;
     }
+    .cart-item-preorder-tag {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 2px;
+    }
     .cart-empty {
       flex: 1;
       display: none;
@@ -2491,6 +2499,7 @@
           row.className = 'cart-item';
           const thumbSrc = item.imgSrc || getProductImg(item.name);
           const isOos = outOfStockNames.has(item.name);
+          const isPreorder = cartPreOrderMode && PRE_ORDER_ITEMS.has(item.name);
           if (isOos) row.classList.add('out-of-stock');
           row.innerHTML = `
             ${thumbSrc ? `<img class="cart-item-thumb" src="${thumbSrc}" alt="${item.name}">` : ''}
@@ -2498,7 +2507,9 @@
               <div class="cart-item-name">${item.name}</div>
               ${isOos
                 ? '<div class="cart-item-oos-tag">Out of stock</div>'
-                : `<div class="cart-item-price">$${Number.isInteger(item.priceNum) ? item.priceNum : item.priceNum.toFixed(2)}</div>`}
+                : isPreorder
+                  ? '<div class="cart-item-preorder-tag">Available for pre-order</div>'
+                  : `<div class="cart-item-price">$${Number.isInteger(item.priceNum) ? item.priceNum : item.priceNum.toFixed(2)}</div>`}
             </div>
             <div class="cart-qty">
               <button class="cart-qty-btn" data-idx="${idx}" data-action="dec" aria-label="Decrease quantity">−</button>
