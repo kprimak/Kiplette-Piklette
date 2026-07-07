@@ -714,6 +714,23 @@
       box-shadow: -4px 0 40px rgba(11,31,58,0.12);
     }
     #cartDrawer.open { transform: translateX(0); }
+    #cartDrawer.fullscreen {
+      width: 100vw;
+      left: 0;
+    }
+    #cartDrawer.fullscreen .cart-items,
+    #cartDrawer.fullscreen .cart-footer {
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+    }
+    #cartDrawer.fullscreen .cart-drawer-header {
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+      width: calc(100% - 64px);
+    }
     .cart-drawer-header {
       display: flex;
       align-items: center;
@@ -746,6 +763,14 @@
       gap: 14px;
       padding: 16px 32px;
       border-bottom: 1px solid rgba(184,150,90,0.14);
+    }
+    .cart-item-thumb {
+      width: 44px;
+      height: 44px;
+      object-fit: cover;
+      border-radius: 4px;
+      border: 1px solid var(--cream);
+      flex-shrink: 0;
     }
     .cart-item-info { flex: 1; min-width: 0; }
     .cart-item-name {
@@ -2430,7 +2455,9 @@
           total += item.priceNum * item.qty;
           const row = document.createElement('div');
           row.className = 'cart-item';
+          const thumbSrc = item.imgSrc || getProductImg(item.name);
           row.innerHTML = `
+            ${thumbSrc ? `<img class="cart-item-thumb" src="${thumbSrc}" alt="${item.name}">` : ''}
             <div class="cart-item-info">
               <div class="cart-item-name">${item.name}</div>
               <div class="cart-item-price">$${Number.isInteger(item.priceNum) ? item.priceNum : item.priceNum.toFixed(2)}</div>
@@ -2459,22 +2486,46 @@
       document.body.style.overflow = 'hidden';
     }
 
+    let cartFullscreen = false;
+
     function closeCart() {
-      document.getElementById('cartDrawer').classList.remove('open');
+      cartFullscreen = false;
+      document.getElementById('cartDrawer').classList.remove('open', 'fullscreen');
       document.getElementById('cartOverlay').classList.remove('open');
       document.getElementById('cartDrawer').setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
     }
 
+    function getProductImg(name) {
+      const card = Array.from(document.querySelectorAll('[data-name]')).find(c => c.dataset.name === name);
+      if (!card) return '';
+      const img = card.querySelector('.product-img-wrap img');
+      return img ? img.src : '';
+    }
+
     function addToCart(name, priceStr) {
       const priceNum = parseCartPrice(priceStr);
       const existing = cart.find(i => i.name === name);
-      if (existing) { existing.qty++; } else { cart.push({ name, priceNum, qty: 1 }); }
+      if (existing) { existing.qty++; } else {
+        cart.push({ name, priceNum, qty: 1, imgSrc: getProductImg(name) });
+      }
       saveCart();
       updateBadge();
     }
 
-    document.getElementById('cartBadgeBtn').addEventListener('click', openCart);
+    document.getElementById('cartBadgeBtn').addEventListener('click', () => {
+      const drawer = document.getElementById('cartDrawer');
+      if (!drawer.classList.contains('open')) {
+        cartFullscreen = false;
+        openCart();
+      } else if (!cartFullscreen) {
+        cartFullscreen = true;
+        drawer.classList.add('fullscreen');
+        document.getElementById('cartOverlay').classList.remove('open');
+      } else {
+        closeCart();
+      }
+    });
     document.getElementById('cartClose').addEventListener('click', closeCart);
     document.getElementById('cartOverlay').addEventListener('click', closeCart);
     document.getElementById('cartContinueShopping').addEventListener('click', closeCart);
