@@ -94,6 +94,17 @@
       text-decoration: none;
       line-height: 1;
       flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-logo-img {
+      width: 34px;
+      height: 34px;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+      flex-shrink: 0;
     }
 
     .nav-logo em {
@@ -1639,6 +1650,7 @@
   <!-- ─── NAVIGATION ─── -->
   <nav id="nav" role="navigation" aria-label="Main navigation">
     <a href="#view-home" data-nav-view="home" class="nav-logo" aria-label="Kiplette — Home">
+      <img src="logo.webp" alt="" aria-hidden="true" class="nav-logo-img">
       <span style="color:var(--gold)">Kiplette</span>
     </a>
 
