@@ -854,6 +854,11 @@
       color: var(--text-light);
       margin-top: 10px;
     }
+    .cart-checkout-btn.preorder {
+      background: var(--gold);
+      letter-spacing: 0.18em;
+    }
+    .cart-checkout-btn.preorder:hover { background: var(--gold-light); }
     .cart-unavailable-msg {
       font-size: 0.72rem;
       color: #c0392b;
@@ -2441,7 +2446,12 @@
 
     // ─── CART ───
     let cart = JSON.parse(localStorage.getItem('kiplette-cart') || '[]');
-    let outOfStockName = null;
+    const PRE_ORDER_ITEMS = new Set([
+      'Beginner Set', 'Beginner Set II', 'Navy Starter Pack',
+      'Tournament Bag', 'Elite Glass Fibre', 'Lite Composite'
+    ]);
+    let outOfStockNames = new Set();
+    let cartPreOrderMode = false;
 
     function parseCartPrice(str) {
       const m = (str || '').replace(/<[^>]*>/g, '').match(/[\d.]+/);
@@ -2480,7 +2490,7 @@
           const row = document.createElement('div');
           row.className = 'cart-item';
           const thumbSrc = item.imgSrc || getProductImg(item.name);
-          const isOos = outOfStockName === item.name;
+          const isOos = outOfStockNames.has(item.name);
           if (isOos) row.classList.add('out-of-stock');
           row.innerHTML = `
             ${thumbSrc ? `<img class="cart-item-thumb" src="${thumbSrc}" alt="${item.name}">` : ''}
@@ -2503,7 +2513,15 @@
         const fmt = total % 1 === 0 ? total : total.toFixed(2);
         subtotalEl.textContent = '$' + fmt;
         const msgEl = document.getElementById('cartUnavailableMsg');
-        if (msgEl) msgEl.style.display = outOfStockName ? '' : 'none';
+        if (msgEl) msgEl.style.display = outOfStockNames.size ? '' : 'none';
+        const checkoutBtn = document.getElementById('cartCheckoutBtn');
+        if (cartPreOrderMode) {
+          checkoutBtn.textContent = 'Pre-order Now';
+          checkoutBtn.classList.add('preorder');
+        } else {
+          checkoutBtn.textContent = 'Checkout';
+          checkoutBtn.classList.remove('preorder');
+        }
       }
       updateBadge();
     }
@@ -2520,7 +2538,8 @@
 
     function closeCart() {
       cartFullscreen = false;
-      outOfStockName = null;
+      outOfStockNames = new Set();
+      cartPreOrderMode = false;
       document.getElementById('cartDrawer').classList.remove('open', 'fullscreen');
       document.getElementById('cartOverlay').classList.remove('open');
       document.getElementById('cartDrawer').setAttribute('aria-hidden', 'true');
@@ -2563,8 +2582,12 @@
 
     document.getElementById('cartCheckoutBtn').addEventListener('click', () => {
       if (cart.length === 0) return;
-      const idx = Math.floor(Math.random() * cart.length);
-      outOfStockName = cart[idx].name;
+      if (cartPreOrderMode) return;
+      outOfStockNames = new Set();
+      cart.forEach(item => {
+        if (!PRE_ORDER_ITEMS.has(item.name)) outOfStockNames.add(item.name);
+      });
+      cartPreOrderMode = cart.some(item => PRE_ORDER_ITEMS.has(item.name));
       renderCart();
     });
 
