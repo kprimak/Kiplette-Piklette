@@ -912,54 +912,54 @@
     #preorderModal.open .preorder-inner { transform: scale(1); }
     .preorder-left {
       width: 38%;
-      background: var(--navy);
+      background: var(--white);
       padding: 56px 48px;
       display: flex;
       flex-direction: column;
       overflow-y: auto;
       flex-shrink: 0;
+      border-right: 1px solid var(--cream);
     }
     .preorder-left-heading {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 300;
-      color: var(--ivory);
-      line-height: 1.15;
-      margin-bottom: 32px;
+      font-size: clamp(1.2rem, 2vw, 1.6rem);
+      font-weight: 400;
+      color: var(--text-mid);
+      line-height: 1.2;
+      margin-bottom: 24px;
     }
     .preorder-left-heading em { color: var(--gold); font-style: italic; }
-    .preorder-items-list { display: flex; flex-direction: column; gap: 16px; }
+    .preorder-items-list { display: flex; flex-direction: column; gap: 0; }
     .preorder-modal-item {
       display: flex;
       align-items: center;
       gap: 14px;
-      padding: 14px 16px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(184,150,90,0.2);
-      border-radius: 4px;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(184,150,90,0.14);
     }
     .preorder-modal-thumb {
-      width: 52px;
-      height: 52px;
+      width: 44px;
+      height: 44px;
       object-fit: cover;
       border-radius: 3px;
+      border: 1px solid var(--cream);
       flex-shrink: 0;
     }
     .preorder-modal-item-name {
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       font-weight: 500;
-      color: var(--ivory);
+      color: var(--navy);
       letter-spacing: 0.01em;
       margin-bottom: 3px;
     }
     .preorder-modal-item-meta {
       font-size: 0.72rem;
-      color: var(--gold-light);
-      letter-spacing: 0.04em;
+      color: var(--text-mid);
+      letter-spacing: 0.02em;
     }
     .preorder-right {
       flex: 1;
-      background: var(--ivory);
+      background: var(--navy);
       overflow-y: auto;
       display: flex;
       align-items: center;
@@ -969,14 +969,14 @@
     .preorder-right-content { width: 100%; max-width: 420px; }
     .preorder-form-heading {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.9rem;
-      font-weight: 400;
-      color: var(--navy);
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 300;
+      color: var(--ivory);
       margin-bottom: 10px;
     }
     .preorder-form-sub {
       font-size: 0.82rem;
-      color: var(--text-mid);
+      color: rgba(247,244,238,0.65);
       line-height: 1.6;
       margin-bottom: 28px;
     }
@@ -988,25 +988,25 @@
       font-weight: 600;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--text-mid);
+      color: rgba(247,244,238,0.6);
     }
     .preorder-input {
       height: 44px;
-      border: 1px solid var(--cream);
-      background: var(--white);
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.07);
       padding: 0 14px;
       font-family: 'Inter', sans-serif;
       font-size: 0.82rem;
-      color: var(--text-dark);
+      color: var(--ivory);
       outline: none;
       transition: border-color 200ms ease;
       border-radius: 2px;
     }
+    .preorder-input::placeholder { color: rgba(247,244,238,0.35); }
     .preorder-input:focus { border-color: var(--gold); }
-    .preorder-input::placeholder { color: var(--text-light); }
     .preorder-submit {
       height: 50px;
-      background: var(--navy);
+      background: var(--gold);
       color: var(--white);
       border: none;
       cursor: pointer;
@@ -1019,7 +1019,7 @@
       transition: background 250ms ease;
       border-radius: 2px;
     }
-    .preorder-submit:hover { background: var(--navy-mid); }
+    .preorder-submit:hover { background: var(--gold-light); }
     .preorder-close {
       position: absolute;
       top: 24px;
@@ -1027,14 +1027,14 @@
       background: none;
       border: none;
       font-size: 1.3rem;
-      color: var(--text-mid);
+      color: rgba(247,244,238,0.6);
       cursor: pointer;
       z-index: 10;
       line-height: 1;
       padding: 4px;
       transition: color 200ms ease;
     }
-    .preorder-close:hover { color: var(--navy); }
+    .preorder-close:hover { color: var(--ivory); }
     .preorder-success {
       display: flex;
       flex-direction: column;
@@ -1048,7 +1048,7 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.3rem;
       font-weight: 400;
-      color: var(--navy);
+      color: var(--ivory);
       line-height: 1.5;
     }
     @media (max-width: 640px) {
@@ -1933,9 +1933,9 @@
     <div class="preorder-inner">
       <button class="preorder-close" id="preorderClose" aria-label="Close pre-order">&#x2715;</button>
       <div class="preorder-left">
-        <span class="eyebrow" style="color:var(--gold-light)">Pre-order</span>
-        <div class="rule-h" aria-hidden="true" style="border-color:rgba(212,180,131,0.3);margin:16px 0 24px;"></div>
-        <h2 class="preorder-left-heading" id="preorderTitle">Your<br><em>Selection</em></h2>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:var(--gold);letter-spacing:0.04em;">Pre-order</span>
+        <div class="rule-h" aria-hidden="true" style="margin:14px 0 20px;"></div>
+        <h2 class="preorder-left-heading" id="preorderTitle">Your <em>Selection</em></h2>
         <div id="preorderItemsList" class="preorder-items-list"></div>
       </div>
       <div class="preorder-right">
