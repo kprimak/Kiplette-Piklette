@@ -2530,17 +2530,6 @@
     document.getElementById('cartOverlay').addEventListener('click', closeCart);
     document.getElementById('cartContinueShopping').addEventListener('click', closeCart);
 
-    document.getElementById('cartDrawer').addEventListener('click', e => {
-      if (cartFullscreen) return;
-      if (e.target.closest('#cartClose, .cart-qty-btn, .cart-remove, .cart-checkout-btn, #cartContinueShopping, a')) return;
-      const drawer = document.getElementById('cartDrawer');
-      if (drawer.classList.contains('open')) {
-        cartFullscreen = true;
-        drawer.classList.add('fullscreen');
-        document.getElementById('cartOverlay').classList.remove('open');
-      }
-    });
-
     document.getElementById('cartItems').addEventListener('click', e => {
       const qBtn = e.target.closest('.cart-qty-btn');
       const rBtn = e.target.closest('.cart-remove');
