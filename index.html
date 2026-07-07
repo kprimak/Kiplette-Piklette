@@ -956,6 +956,38 @@
       color: var(--gold-light);
       letter-spacing: 0.02em;
     }
+    .preorder-total {
+      margin-top: auto;
+      padding-top: 20px;
+      border-top: 1px solid rgba(184,150,90,0.25);
+    }
+    .preorder-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+    }
+    .preorder-total-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(247,244,238,0.55);
+    }
+    .preorder-total-amount {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--ivory);
+      letter-spacing: 0.02em;
+    }
+    .preorder-total-note {
+      font-size: 0.65rem;
+      color: rgba(247,244,238,0.4);
+      line-height: 1.5;
+      letter-spacing: 0.01em;
+    }
     .preorder-right {
       flex: 1;
       background: var(--white);
@@ -1936,6 +1968,7 @@
         <div class="rule-h" aria-hidden="true" style="margin:14px 0 20px;"></div>
         <h2 class="preorder-left-heading" id="preorderTitle">Your <em>Selection</em></h2>
         <div id="preorderItemsList" class="preorder-items-list"></div>
+        <div id="preorderTotal" class="preorder-total"></div>
       </div>
       <div class="preorder-right">
         <div class="preorder-right-content">
@@ -2825,6 +2858,15 @@
           </div>`;
         listEl.appendChild(el);
       });
+      const preorderItems = cart.filter(item => PRE_ORDER_ITEMS.has(item.name));
+      const total = preorderItems.reduce((sum, item) => sum + item.priceNum * item.qty, 0);
+      const totalEl = document.getElementById('preorderTotal');
+      totalEl.innerHTML = `
+        <div class="preorder-total-row">
+          <span class="preorder-total-label">Estimated Total</span>
+          <span class="preorder-total-amount">$${Number.isInteger(total) ? total : total.toFixed(2)}</span>
+        </div>
+        <p class="preorder-total-note">Taxes and shipping will be calculated when you place your final order.</p>`;
       document.getElementById('preorderForm').style.display = '';
       document.getElementById('preorderSuccess').style.display = 'none';
       const modal = document.getElementById('preorderModal');
