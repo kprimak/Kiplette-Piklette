@@ -118,7 +118,7 @@
     #sidePanelOverlay.open { opacity: 1; pointer-events: all; }
     #sidePanel {
       position: fixed;
-      top: 80px; left: 0; bottom: 0;
+      top: 0; left: 0; bottom: 0;
       width: 280px;
       background: var(--navy);
       z-index: 9999;
@@ -2948,6 +2948,7 @@
       sidePanelOverlay.classList.add('open');
       sidePanelBtn.setAttribute('aria-expanded', 'true');
       document.body.style.overflow = 'hidden';
+      document.getElementById('nav').style.visibility = 'hidden';
     }
     function closeSidePanel() {
       sidePanel.classList.remove('open');
@@ -2955,6 +2956,7 @@
       sidePanelOverlay.classList.remove('open');
       sidePanelBtn.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
+      document.getElementById('nav').style.visibility = '';
     }
 
     sidePanelBtn.addEventListener('click', openSidePanel);
