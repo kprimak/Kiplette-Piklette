@@ -66,7 +66,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 56px 0 20px;
+      padding: 0 56px;
       height: 80px;
       background: rgba(255,255,255,0.97);
       border-bottom: 1px solid rgba(184,150,90,0.2);
@@ -656,128 +656,6 @@
     }
     .add-btn svg { width: 18px; height: 18px; }
 
-    /* ─── NAV LEFT ─── */
-    .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-    }
-    .nav-side-btn {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      outline: none;
-      cursor: pointer;
-      padding: 6px 4px;
-      align-items: center;
-      justify-content: center;
-    }
-    .nav-side-btn span {
-      display: block;
-      width: 22px;
-      height: 1.5px;
-      background: var(--gold);
-      border-radius: 1px;
-      transition: background 200ms ease;
-    }
-    .nav-side-btn:hover span { background: var(--gold); }
-
-    /* ─── SIDE MENU ─── */
-    #sideMenuOverlay {
-      position: fixed; inset: 0;
-      background: rgba(11,31,58,0.45);
-      z-index: 199;
-      opacity: 0; pointer-events: none;
-      transition: opacity 300ms ease;
-    }
-    #sideMenuOverlay.open { opacity: 1; pointer-events: all; }
-    #sideMenu {
-      position: fixed;
-      top: 80px; left: 0; bottom: 0;
-      width: 300px;
-      background: var(--navy);
-      z-index: 200;
-      display: flex;
-      flex-direction: column;
-      transform: translateX(-100%);
-      transition: transform 360ms cubic-bezier(0.4, 0, 0.2, 1);
-      overflow-y: auto;
-    }
-    #sideMenu.open { transform: translateX(0); }
-    .side-menu-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 28px 28px 20px;
-      border-bottom: 1px solid rgba(184,150,90,0.2);
-    }
-    .side-menu-brand {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--gold);
-    }
-    .side-menu-close {
-      background: none; border: none; cursor: pointer;
-      font-size: 1.1rem; color: rgba(247,244,238,0.5);
-      transition: color 200ms ease; padding: 4px; line-height: 1;
-    }
-    .side-menu-close:hover { color: var(--ivory); }
-    .side-menu-nav {
-      display: flex;
-      flex-direction: column;
-      padding: 8px 0 40px;
-    }
-    .side-menu-item-wrap { display: flex; flex-direction: column; }
-    .side-menu-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 15px 28px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.8rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(247,244,238,0.8);
-      text-decoration: none;
-      background: none; border: none; cursor: pointer; width: 100%; text-align: left;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      transition: color 200ms ease, background 200ms ease;
-    }
-    .side-menu-item:hover { color: var(--gold); background: rgba(184,150,90,0.07); }
-    .side-menu-accordion { }
-    .side-menu-chevron {
-      transition: transform 280ms ease;
-      color: rgba(247,244,238,0.4);
-      flex-shrink: 0;
-    }
-    .side-menu-accordion[aria-expanded="true"] .side-menu-chevron { transform: rotate(180deg); }
-    .side-menu-dropdown {
-      list-style: none;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 320ms ease;
-      background: rgba(0,0,0,0.18);
-    }
-    .side-menu-dropdown.open { max-height: 400px; }
-    .side-menu-sub {
-      display: block;
-      padding: 12px 28px 12px 44px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(247,244,238,0.55);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-      transition: color 200ms ease;
-    }
-    .side-menu-sub:hover { color: var(--gold-light); }
 
     /* ─── CART ICON (NAV) ─── */
     .nav-cart-btn {
@@ -2129,14 +2007,9 @@
 
   <!-- ─── NAVIGATION ─── -->
   <nav id="nav" role="navigation" aria-label="Main navigation">
-    <div class="nav-left">
-      <button class="nav-side-btn" id="sideMenuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="sideMenu">
-        <span></span><span></span><span></span>
-      </button>
-      <a href="#view-home" data-nav-view="home" class="nav-logo" aria-label="Kiplette — Home">
-        <span style="color:var(--gold)">Kiplette</span>
-      </a>
-    </div>
+    <a href="#view-home" data-nav-view="home" class="nav-logo" aria-label="Kiplette — Home">
+      <span style="color:var(--gold)">Kiplette</span>
+    </a>
 
     <div class="nav-right">
     <ul class="nav-links" id="navLinks" role="list">
@@ -2162,37 +2035,6 @@
       <span></span><span></span><span></span>
     </button>
   </nav>
-
-  <!-- ─── SIDE MENU ─── -->
-  <div id="sideMenuOverlay" aria-hidden="true"></div>
-  <div id="sideMenu" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Site navigation">
-    <div class="side-menu-header">
-      <span class="side-menu-brand">Menu</span>
-      <button class="side-menu-close" id="sideMenuClose" aria-label="Close menu">&#x2715;</button>
-    </div>
-    <nav class="side-menu-nav" aria-label="Side navigation">
-      <div class="side-menu-item-wrap">
-        <button class="side-menu-item side-menu-accordion" id="shopAccordionBtn" aria-expanded="false">
-          <span>Shop All</span>
-          <svg class="side-menu-chevron" width="12" height="8" viewBox="0 0 12 8" fill="none" aria-hidden="true">
-            <path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-          </svg>
-        </button>
-        <ul class="side-menu-dropdown" id="shopDropdown" aria-hidden="true">
-          <li><a href="#view-shop" data-nav-view="shop" class="side-menu-sub" data-close-side>All Products</a></li>
-          <li><a href="#view-shop" data-nav-view="shop" class="side-menu-sub" data-close-side>Paddles</a></li>
-          <li><a href="#view-shop" data-nav-view="shop" class="side-menu-sub" data-close-side>Bags</a></li>
-          <li><a href="#view-shop" data-nav-view="shop" class="side-menu-sub" data-close-side>Balls</a></li>
-          <li><a href="#view-shop" data-nav-view="shop" class="side-menu-sub" data-close-side>Accessories</a></li>
-          <li><a href="#view-shop" data-nav-view="shop" class="side-menu-sub" data-close-side>Gift Sets</a></li>
-        </ul>
-      </div>
-      <a href="#view-about" data-nav-view="about" class="side-menu-item" data-close-side>About Us</a>
-      <a href="#view-pickleball" data-nav-view="pickleball" class="side-menu-item" data-close-side>About Pickleball</a>
-      <a href="#view-contact" data-nav-view="contact" class="side-menu-item" data-close-side>Contact Us</a>
-      <a href="#view-about" data-nav-view="about" class="side-menu-item" data-close-side>Support</a>
-    </nav>
-  </div>
 
   <!-- ─── CART DRAWER ─── -->
   <div id="cartOverlay" aria-hidden="true"></div>
@@ -3005,43 +2847,6 @@
       });
     }, { threshold: 0.5 });
     heroObserver.observe(heroSection);
-
-    // ─── SIDE MENU ───
-    const sideMenuBtn = document.getElementById('sideMenuBtn');
-    const sideMenu = document.getElementById('sideMenu');
-    const sideMenuOverlay = document.getElementById('sideMenuOverlay');
-    const sideMenuClose = document.getElementById('sideMenuClose');
-    const shopAccordionBtn = document.getElementById('shopAccordionBtn');
-    const shopDropdown = document.getElementById('shopDropdown');
-
-    function openSideMenu() {
-      sideMenu.classList.add('open');
-      sideMenu.setAttribute('aria-hidden', 'false');
-      sideMenuOverlay.classList.add('open');
-      sideMenuBtn.setAttribute('aria-expanded', 'true');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeSideMenu() {
-      sideMenu.classList.remove('open');
-      sideMenu.setAttribute('aria-hidden', 'true');
-      sideMenuOverlay.classList.remove('open');
-      sideMenuBtn.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    }
-
-    sideMenuBtn.addEventListener('click', openSideMenu);
-    sideMenuClose.addEventListener('click', closeSideMenu);
-    sideMenuOverlay.addEventListener('click', closeSideMenu);
-
-    shopAccordionBtn.addEventListener('click', () => {
-      const open = shopDropdown.classList.toggle('open');
-      shopAccordionBtn.setAttribute('aria-expanded', open);
-      shopDropdown.setAttribute('aria-hidden', !open);
-    });
-
-    document.querySelectorAll('[data-close-side]').forEach(el => {
-      el.addEventListener('click', closeSideMenu);
-    });
 
     // ─── MOBILE NAV ───
     const menuBtn = document.getElementById('menuBtn');
