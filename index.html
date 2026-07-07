@@ -2193,14 +2193,14 @@
         <button class="filter-btn" onclick="filterProducts('paddle',this)">Paddles</button>
         <button class="filter-btn" onclick="filterProducts('ball',this)">Balls</button>
         <button class="filter-btn" onclick="filterProducts('accessory',this)">Accessories</button>
-        <button class="filter-btn" onclick="filterProducts('bundle',this)">Bundles</button>
+        <button class="filter-btn" onclick="filterProducts('bundle',this)">Sets</button>
       </div>
     </div>
 
     <div class="product-grid" id="productGrid" role="list">
 
       <!-- Black bag -->
-      <article class="product-card reveal" data-category="paddle" role="listitem" tabindex="0" aria-label="Charcoal Black Tournament Bag, $119"
+      <article class="product-card reveal" data-category="accessory" role="listitem" tabindex="0" aria-label="Charcoal Black Tournament Bag, $119"
         data-name="Charcoal Black Tournament Bag" data-cat="Control Paddle" data-price="$119" data-tag=""
         data-desc="Tournament bag with two interior pockets for the balls, a strap to hold the racquets in place and a zip-lock pocket for small essentials. Made in a charcoal black tournament bag with white accents, paired with silver detailing.">
         <div class="product-img-wrap">
@@ -2224,7 +2224,7 @@
       </article>
 
       <!-- Navy racquet (between black and white bag) -->
-      <article class="product-card reveal reveal-delay-1" data-category="paddle" role="listitem" tabindex="0" aria-label="White Tournament Bag, $149"
+      <article class="product-card reveal reveal-delay-1" data-category="accessory" role="listitem" tabindex="0" aria-label="White Tournament Bag, $149"
         data-name="White Tournament Bag" data-cat="Performance Paddle" data-price="$149 <sub>incl. shipping</sub>" data-tag="New Season"
         data-desc="Holds 2 paddles, 2 balls, and all other essentials! Faux leather with a beautiful white finish, gold detailing and navy accents. Two interior pockets for the balls, a strap to keep the racquets in place, and a small zip-lock pocket for small essentials like napkins, sunscreen and lipgloss.">
         <div class="product-tag">New Season</div>
@@ -2249,7 +2249,7 @@
       </article>
 
       <!-- White bag -->
-      <article class="product-card reveal reveal-delay-2" data-category="accessory" role="listitem" tabindex="0" aria-label="Kiplette Pro Carbon, $59"
+      <article class="product-card reveal reveal-delay-2" data-category="paddle" role="listitem" tabindex="0" aria-label="Kiplette Pro Carbon, $59"
         data-name="Kiplette Pro Carbon" data-cat="Accessories" data-price="$59" data-tag=""
         data-desc="T700 raw carbon fibre face with 16mm polypropylene honeycomb core. Engineered for maximum spin and commanding power. Featuring an edge guard for durability and a cushioned grip for extended play sessions. USAPA approved for tournament play.">
         <div class="product-img-wrap">
@@ -2714,11 +2714,11 @@
       <div class="footer-col">
         <h4>Collection</h4>
         <ul>
-          <li><a href="#view-shop" data-nav-view="shop">All Products</a></li>
-          <li><a href="#view-shop" data-nav-view="shop">Paddles</a></li>
-          <li><a href="#view-shop" data-nav-view="shop">Balls</a></li>
-          <li><a href="#view-shop" data-nav-view="shop">Accessories</a></li>
-          <li><a href="#view-shop" data-nav-view="shop">Gift Sets</a></li>
+          <li><a href="#view-shop" data-nav-view="shop" data-shop-filter="all">All Products</a></li>
+          <li><a href="#view-shop" data-nav-view="shop" data-shop-filter="paddle">Paddles</a></li>
+          <li><a href="#view-shop" data-nav-view="shop" data-shop-filter="ball">Balls</a></li>
+          <li><a href="#view-shop" data-nav-view="shop" data-shop-filter="accessory">Accessories</a></li>
+          <li><a href="#view-shop" data-nav-view="shop" data-shop-filter="bundle">Sets</a></li>
         </ul>
       </div>
 
@@ -2886,11 +2886,22 @@
     // ─── PRODUCT FILTER ───
     function filterProducts(cat, btn) {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+      if (btn) btn.classList.add('active');
+      else {
+        const match = [...document.querySelectorAll('.filter-btn')].find(b => b.onclick?.toString().includes(`'${cat}'`));
+        if (match) match.classList.add('active');
+      }
       document.querySelectorAll('#productGrid .product-card').forEach(card => {
         card.style.display = (cat === 'all' || card.dataset.category === cat) ? '' : 'none';
       });
     }
+
+    document.addEventListener('click', e => {
+      const link = e.target.closest('[data-shop-filter]');
+      if (!link) return;
+      const cat = link.dataset.shopFilter;
+      setTimeout(() => filterProducts(cat, null), 50);
+    });
 
     // ─── CART ───
     let cart = JSON.parse(localStorage.getItem('kiplette-cart') || '[]');
