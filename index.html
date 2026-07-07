@@ -854,6 +854,26 @@
       color: var(--text-light);
       margin-top: 10px;
     }
+    .cart-unavailable-msg {
+      font-size: 0.72rem;
+      color: #c0392b;
+      background: #fdf0ef;
+      border: 1px solid rgba(192,57,43,0.25);
+      border-radius: 4px;
+      padding: 10px 14px;
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+    .cart-item.out-of-stock .cart-item-name { color: #c0392b; }
+    .cart-item.out-of-stock .cart-item-thumb { opacity: 0.45; }
+    .cart-item-oos-tag {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #c0392b;
+      margin-top: 2px;
+    }
     .cart-empty {
       flex: 1;
       display: none;
@@ -1717,7 +1737,10 @@
         <span>Subtotal</span>
         <span id="cartSubtotal">$0</span>
       </div>
-      <button class="cart-checkout-btn">Checkout</button>
+      <div id="cartUnavailableMsg" class="cart-unavailable-msg" style="display:none">
+        Unfortunately, one or more items in your basket is currently unavailable.
+      </div>
+      <button class="cart-checkout-btn" id="cartCheckoutBtn">Checkout</button>
       <p class="cart-note">Shipping &amp; taxes calculated at checkout</p>
     </div>
   </aside>
@@ -2418,6 +2441,7 @@
 
     // ─── CART ───
     let cart = JSON.parse(localStorage.getItem('kiplette-cart') || '[]');
+    let outOfStockName = null;
 
     function parseCartPrice(str) {
       const m = (str || '').replace(/<[^>]*>/g, '').match(/[\d.]+/);
@@ -2456,11 +2480,15 @@
           const row = document.createElement('div');
           row.className = 'cart-item';
           const thumbSrc = item.imgSrc || getProductImg(item.name);
+          const isOos = outOfStockName === item.name;
+          if (isOos) row.classList.add('out-of-stock');
           row.innerHTML = `
             ${thumbSrc ? `<img class="cart-item-thumb" src="${thumbSrc}" alt="${item.name}">` : ''}
             <div class="cart-item-info">
               <div class="cart-item-name">${item.name}</div>
-              <div class="cart-item-price">$${Number.isInteger(item.priceNum) ? item.priceNum : item.priceNum.toFixed(2)}</div>
+              ${isOos
+                ? '<div class="cart-item-oos-tag">Out of stock</div>'
+                : `<div class="cart-item-price">$${Number.isInteger(item.priceNum) ? item.priceNum : item.priceNum.toFixed(2)}</div>`}
             </div>
             <div class="cart-qty">
               <button class="cart-qty-btn" data-idx="${idx}" data-action="dec" aria-label="Decrease quantity">−</button>
@@ -2474,6 +2502,8 @@
         });
         const fmt = total % 1 === 0 ? total : total.toFixed(2);
         subtotalEl.textContent = '$' + fmt;
+        const msgEl = document.getElementById('cartUnavailableMsg');
+        if (msgEl) msgEl.style.display = outOfStockName ? '' : 'none';
       }
       updateBadge();
     }
@@ -2490,6 +2520,7 @@
 
     function closeCart() {
       cartFullscreen = false;
+      outOfStockName = null;
       document.getElementById('cartDrawer').classList.remove('open', 'fullscreen');
       document.getElementById('cartOverlay').classList.remove('open');
       document.getElementById('cartDrawer').setAttribute('aria-hidden', 'true');
@@ -2529,6 +2560,13 @@
     document.getElementById('cartClose').addEventListener('click', closeCart);
     document.getElementById('cartOverlay').addEventListener('click', closeCart);
     document.getElementById('cartContinueShopping').addEventListener('click', closeCart);
+
+    document.getElementById('cartCheckoutBtn').addEventListener('click', () => {
+      if (cart.length === 0) return;
+      const idx = Math.floor(Math.random() * cart.length);
+      outOfStockName = cart[idx].name;
+      renderCart();
+    });
 
     document.getElementById('cartItems').addEventListener('click', e => {
       const qBtn = e.target.closest('.cart-qty-btn');
