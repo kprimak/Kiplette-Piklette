@@ -1114,9 +1114,10 @@
       line-height: 1.5;
     }
     @media (max-width: 640px) {
-      .preorder-inner { flex-direction: column; overflow-y: auto; }
+      #preorderModal { overflow-y: auto; align-items: flex-start; }
+      .preorder-inner { flex-direction: column; height: auto; min-height: 100%; overflow-y: visible; }
       .preorder-left { width: 100%; padding: 36px 24px 28px; flex-shrink: 0; overflow-y: visible; }
-      .preorder-right { padding: 32px 24px 48px; align-items: flex-start; }
+      .preorder-right { overflow-y: visible; padding: 32px 24px 48px; align-items: flex-start; }
       .preorder-row { grid-template-columns: 1fr; }
     }
     .cart-empty {
@@ -2090,6 +2091,7 @@
       <li><a href="#view-shop" data-nav-view="shop">Shop All</a></li>
       <li><a href="#view-pickleball" data-nav-view="pickleball">About Pickleball</a></li>
       <li><a href="#view-about" data-nav-view="about">About Us</a></li>
+      <li><a href="#view-contact" data-nav-view="contact">Contact Us</a></li>
     </ul>
 
     <button class="nav-cart-btn" id="cartBadgeBtn" aria-label="Open basket">
