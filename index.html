@@ -2010,26 +2010,23 @@
       .footer-top { grid-template-columns: 1fr; }
       .hero-title { font-size: clamp(2.8rem, 12vw, 4rem); }
 
-      /* Phone-only: filters wrap to two rows with gold separators */
+      /* Phone-only: filters wrap to two rows, each button individually outlined */
       .shop-filters {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 0;
+        gap: 6px;
         background: transparent;
         border: none;
       }
       .filter-btn {
         background: transparent;
+        border: 1px solid var(--rule);
         border-right: 1px solid var(--rule);
         border-bottom: 1px solid var(--rule);
       }
-      /* 3rd column (Accessories): no right border */
-      .filter-btn:nth-child(3n) { border-right: none; }
-      /* Row 2 items (Sets, Balls): no bottom border */
-      .filter-btn:nth-child(n+4) { border-bottom: none; }
-      /* Accessories (3rd item): no bottom border — prevents the empty-cell square */
-      .filter-btn:nth-child(3) { border-bottom: none; }
-      /* Balls (5th item): keep its right border — do NOT override with last-child */
+      .filter-btn:nth-child(3n) { border-right: 1px solid var(--rule); }
+      .filter-btn:nth-child(n+4) { border-bottom: 1px solid var(--rule); }
+      .filter-btn:last-child { border-right: 1px solid var(--rule); }
       .filter-btn.active, .filter-btn:hover { background: var(--navy); }
 
       /* Phone-only: collapse product text, show on tap via focus */
