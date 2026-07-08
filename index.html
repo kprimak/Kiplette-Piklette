@@ -603,18 +603,19 @@
     }
 
     .product-info {
-      padding: 28px 28px 24px;
+      padding: 0 24px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      flex: 1;
+      gap: 6px;
+      overflow: hidden;
+      max-height: 0;
       opacity: 0;
-      transform: translateY(6px);
-      transition: opacity 200ms ease, transform 200ms ease;
+      transition: max-height 220ms ease, opacity 200ms ease, padding 200ms ease;
     }
     .product-card:hover .product-info {
+      max-height: 180px;
       opacity: 1;
-      transform: translateY(0);
+      padding: 20px 24px 0;
     }
 
     .product-category {
@@ -627,7 +628,7 @@
 
     .product-name {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem;
+      font-size: 1.25rem;
       font-weight: 500;
       color: var(--navy);
       line-height: 1.2;
@@ -635,20 +636,19 @@
     }
 
     .product-desc {
-      font-size: 0.8125rem;
+      font-size: 0.78rem;
       color: var(--text-mid);
-      line-height: 1.7;
-      margin-top: 4px;
-      flex: 1;
+      line-height: 1.6;
+      margin-top: 2px;
     }
 
     .product-footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-top: 20px;
-      padding-top: 20px;
+      padding: 14px 24px;
       border-top: 1px solid rgba(11,31,58,0.08);
+      margin-top: 0;
     }
 
     .product-price {
@@ -2252,14 +2252,14 @@
           <div class="product-category">Control Paddle</div>
           <h3 class="product-name">Charcoal Black Tournament Bag</h3>
           <p class="product-desc">Charcoal black finish with white accents and silver detailing. Two interior pockets, racquet strap, and zip-lock essentials pocket.</p>
-          <div class="product-footer">
-            <div class="product-price">$119</div>
-            <button class="add-btn" aria-label="Add Charcoal Black Tournament Bag to cart">
-              <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
-                <path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-            </button>
-          </div>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">$119</div>
+          <button class="add-btn" aria-label="Add Charcoal Black Tournament Bag to cart">
+            <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
         </div>
       </article>
 
@@ -2277,14 +2277,14 @@
           <div class="product-category">Performance Paddle</div>
           <h3 class="product-name">White Tournament Bag</h3>
           <p class="product-desc">Faux leather with a beautiful white finish, gold detailing and navy accents. Holds 2 paddles, 2 balls, and all other essentials.</p>
-          <div class="product-footer">
-            <div class="product-price">$149 <sub>incl. shipping</sub></div>
-            <button class="add-btn" aria-label="Add White Tournament Bag to cart">
-              <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
-                <path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-            </button>
-          </div>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">$149 <sub>incl. shipping</sub></div>
+          <button class="add-btn" aria-label="Add White Tournament Bag to cart">
+            <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
         </div>
       </article>
 
@@ -2301,14 +2301,14 @@
           <div class="product-category">Accessories</div>
           <h3 class="product-name">Kiplette Pro Carbon</h3>
           <p class="product-desc">T700 raw carbon fibre face with 16mm polypropylene honeycomb core. Engineered for maximum spin and commanding power.</p>
-          <div class="product-footer">
-            <div class="product-price">$59</div>
-            <button class="add-btn" aria-label="Add Kiplette Pro Carbon to cart">
-              <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
-                <path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-            </button>
-          </div>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">$59</div>
+          <button class="add-btn" aria-label="Add Kiplette Pro Carbon to cart">
+            <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
         </div>
       </article>
 
@@ -2325,14 +2325,14 @@
           <div class="product-category">Balls</div>
           <h3 class="product-name">Tournament Balls</h3>
           <p class="product-desc">USAPA-approved outdoor balls. 40-hole design for true flight and consistent bounce in every condition.</p>
-          <div class="product-footer">
-            <div class="product-price">$24 <sub>6-pack</sub></div>
-            <button class="add-btn" aria-label="Add Tournament Balls to cart">
-              <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
-                <path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-            </button>
-          </div>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">$24 <sub>6-pack</sub></div>
+          <button class="add-btn" aria-label="Add Tournament Balls to cart">
+            <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
         </div>
       </article>
 
@@ -2350,14 +2350,14 @@
           <div class="product-category">Entry Paddle</div>
           <h3 class="product-name">Lite Composite</h3>
           <p class="product-desc">Lightweight composite at 7.6oz. Tournament quality feel for new players who refuse to compromise on standard.</p>
-          <div class="product-footer">
-            <div class="product-price">$89</div>
-            <button class="add-btn" aria-label="Add Lite Composite to cart">
-              <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
-                <path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-            </button>
-          </div>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">$89</div>
+          <button class="add-btn" aria-label="Add Lite Composite to cart">
+            <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
         </div>
       </article>
 
@@ -2373,14 +2373,14 @@
           <div class="product-category">Accessories</div>
           <h3 class="product-name">Grip Tape Set</h3>
           <p class="product-desc">Premium tacky overgrip. Sweat-absorbing, textured, ultra-thin 0.6mm profile for uncompromised feel.</p>
-          <div class="product-footer">
-            <div class="product-price">$16 <sub>3-pack</sub></div>
-            <button class="add-btn" aria-label="Add Grip Tape Set to cart">
-              <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
-                <path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-            </button>
-          </div>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">$16 <sub>3-pack</sub></div>
+          <button class="add-btn" aria-label="Add Grip Tape Set to cart">
+            <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
         </div>
       </article>
 
@@ -2396,14 +2396,14 @@
           <div class="product-category">Bundle</div>
           <h3 class="product-name">White Starter Pack</h3>
           <p class="product-desc">2 paddles, 2 balls & a racquet case — ideal for beginner to intermediate players.</p>
-          <div class="product-footer">
-            <div class="product-price">$199 <sub>incl. shipping</sub></div>
-            <button class="add-btn" aria-label="Add White Starter Pack to cart">
-              <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
-                <path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-            </button>
-          </div>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">$199 <sub>incl. shipping</sub></div>
+          <button class="add-btn" aria-label="Add White Starter Pack to cart">
+            <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
         </div>
       </article>
 
@@ -2419,14 +2419,14 @@
           <div class="product-category">Bundle</div>
           <h3 class="product-name">Charcoal Black Kit</h3>
           <p class="product-desc">2 paddles, 2 balls & a racquet case — ideal for beginner to intermediate players.</p>
-          <div class="product-footer">
-            <div class="product-price">$199 <sub>incl. shipping</sub></div>
-            <button class="add-btn" aria-label="Add Charcoal Black Kit to cart">
-              <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
-                <path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-            </button>
-          </div>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">$199 <sub>incl. shipping</sub></div>
+          <button class="add-btn" aria-label="Add Charcoal Black Kit to cart">
+            <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
         </div>
       </article>
 
@@ -2442,14 +2442,14 @@
           <div class="product-category">Bundle</div>
           <h3 class="product-name">Navy Starter Pack</h3>
           <p class="product-desc">2 paddles, 2 balls & a racquet case — everything to get on the court from day one.</p>
-          <div class="product-footer">
-            <div class="product-price">$199 <sub>incl. shipping</sub></div>
-            <button class="add-btn" aria-label="Add Navy Starter Pack to cart">
-              <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
-                <path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-            </button>
-          </div>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">$199 <sub>incl. shipping</sub></div>
+          <button class="add-btn" aria-label="Add Navy Starter Pack to cart">
+            <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
         </div>
       </article>
 
