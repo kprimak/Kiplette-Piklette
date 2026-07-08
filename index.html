@@ -524,16 +524,15 @@
     .section-heading em { font-style: italic; font-weight: 300; }
 
     .shop-filters {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: rgba(11,31,58,0.15);
+      display: flex;
+      gap: 0;
       border: 1px solid rgba(11,31,58,0.15);
     }
 
     .filter-btn {
-      background: var(--white);
+      background: transparent;
       border: none;
+      border-right: 1px solid rgba(11,31,58,0.12);
       color: var(--text-light);
       font-size: 0.65rem;
       font-weight: 500;
@@ -543,7 +542,9 @@
       cursor: pointer;
       min-height: 44px;
       transition: all 200ms ease;
+      flex: 1;
     }
+    .filter-btn:last-child { border-right: none; }
     .filter-btn.active, .filter-btn:hover {
       background: var(--navy);
       color: var(--ivory);
@@ -603,19 +604,10 @@
     }
 
     .product-info {
-      padding: 0 24px;
+      padding: 20px 24px 0;
       display: flex;
       flex-direction: column;
       gap: 6px;
-      overflow: hidden;
-      max-height: 0;
-      opacity: 0;
-      transition: max-height 220ms ease, opacity 200ms ease, padding 200ms ease;
-    }
-    .product-card:hover .product-info {
-      max-height: 180px;
-      opacity: 1;
-      padding: 20px 24px 0;
     }
 
     .product-category {
@@ -2016,6 +2008,31 @@
       .about-stats { grid-template-columns: 1fr 1fr; }
       .footer-top { grid-template-columns: 1fr; }
       .hero-title { font-size: clamp(2.8rem, 12vw, 4rem); }
+
+      /* Phone-only: filters wrap to two rows */
+      .shop-filters {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: rgba(11,31,58,0.15);
+      }
+      .filter-btn { border-right: none; background: var(--white); }
+      .filter-btn:last-child { border-right: none; }
+      .filter-btn.active, .filter-btn:hover { background: var(--navy); }
+
+      /* Phone-only: collapse product text, show on tap via focus */
+      .product-info {
+        padding: 0 16px;
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        transition: max-height 220ms ease, opacity 200ms ease, padding 200ms ease;
+      }
+      .product-card:focus-within .product-info {
+        max-height: 180px;
+        opacity: 1;
+        padding: 14px 16px 0;
+      }
     }
   </style>
   <!-- Preload product images so they appear instantly -->
